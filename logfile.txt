@@ -1,0 +1,547 @@
+==7212== Memcheck, a memory error detector
+==7212== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==7212== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==7212== Command: ./crawler jmit.ac.in theDir 3
+==7212== Parent PID: 5155
+==7212== 
+--7212-- 
+--7212-- Valgrind options:
+--7212--    --leak-check=yes
+--7212--    -v
+--7212--    --log-file=logfile.txt
+--7212--    --tool=memcheck
+--7212--    -v
+--7212-- Contents of /proc/version:
+--7212--   Linux version 4.4.0-21-generic (buildd@lgw01-21) (gcc version 5.3.1 20160413 (Ubuntu 5.3.1-14ubuntu2) ) #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016
+--7212-- 
+--7212-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-avx
+--7212-- Page sizes: currently 4096, max supported 4096
+--7212-- Valgrind library directory: /usr/lib/valgrind
+--7212-- TT/TC: VG_(init_tt_tc) (startup of code management)
+--7212-- TT/TC: cache: ignoring --avg-transtab-entry-size=0, using tool provided default 640
+--7212-- TT/TC: cache: 16 sectors of 27597024 bytes each = 441552384 total TC
+--7212-- TT/TC: table: 16 tables[42588]  of 6473376 bytes each = 103574016 total TT
+--7212-- TT/TC: table: 42588 tt entries each = 681408 total tt entries
+--7212-- TT/TC: table: 16 htt[65521] of 131042 bytes each = 2096672 total HTT (htt[65521] 65% max occup)
+==7212== Adding active redirection:
+--7212--     new: 0xffffffffff600000 (???                 ) R-> (0000.0) 0x3809e163 ???
+==7212== Adding active redirection:
+--7212--     new: 0xffffffffff600400 (???                 ) R-> (0000.0) 0x3809e16d ???
+==7212== Adding active redirection:
+--7212--     new: 0xffffffffff600800 (???                 ) R-> (0000.0) 0x3809e177 ???
+--7212-- Reading syms from /home/balwinder1012/C testing/crawler1.0/crawler
+--7212--    svma 0x0000400960, avma 0x0000400960
+--7212-- Reading syms from /lib/x86_64-linux-gnu/ld-2.23.so
+--7212--    svma 0x0000000ac0, avma 0x0004000ac0
+--7212--   Considering /lib/x86_64-linux-gnu/ld-2.23.so ..
+--7212--   .. CRC mismatch (computed d3da0723 wanted a1c29704)
+--7212--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.23.so ..
+--7212--   .. CRC is valid
+--7212-- summarise_context(loc_start = 0x4): cannot summarise(why=1):   
+0xf: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0xf): cannot summarise(why=1):   
+0x158: [0]={ 672(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x10): cannot summarise(why=1):   
+0x35b: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x363): cannot summarise(why=1):   
+0x46d: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x4): cannot summarise(why=1):   
+0xf: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0xf): cannot summarise(why=1):   
+0x150: [0]={ 416(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x10): cannot summarise(why=1):   
+0x36b: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x373): cannot summarise(why=1):   
+0x46f: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x4): cannot summarise(why=1):   
+0xf: [0]={ 32(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0xf): cannot summarise(why=1):   
+0x128: [0]={ 288(r3) { u  u  u  c-32 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x10): cannot summarise(why=1):   
+0x147: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x14f): cannot summarise(why=1):   
+0x1f3: [0]={ 56(r3) { u  u  u  c-56 u  u  u  u  u  u  u  u  u  u  u  u  c-8 u  u  u  }
+--7212-- summarise_context(loc_start = 0x2e): cannot summarise(why=1):   
+0x4c: [0]={ 0(r5) { u  u  u  c0 u  u  r9 r8 u  u  u  u  c16 c24 c32 c40 r1 u  u  u  }
+==7212== Adding active redirection:
+--7212--     new: 0x0401cdc0 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--7212-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--7212--    svma 0x0038000150, avma 0x0038000150
+--7212--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--7212--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
+--7212--    object doesn't have a symbol table
+--7212--    object doesn't have a dynamic symbol table
+--7212-- Scheduler: using generic scheduler lock implementation.
+--7212-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==7212== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-7212-by-balwinder1012-on-???
+==7212== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-7212-by-balwinder1012-on-???
+==7212== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-7212-by-balwinder1012-on-???
+==7212== 
+==7212== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==7212== don't want to do, unless you know exactly what you're doing,
+==7212== or are doing some strange experiment):
+==7212==   /usr/lib/valgrind/../../bin/vgdb --pid=7212 ...command...
+==7212== 
+==7212== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==7212==   /path/to/gdb ./crawler
+==7212== and then give GDB the following command
+==7212==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=7212
+==7212== --pid is optional if only one valgrind process is running
+==7212== 
+--7212-- TT/TC: initialise sector 0
+--7212-- REDIR: 0x401cdc0 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
+--7212-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--7212--    svma 0x0000000580, avma 0x0004a28580
+--7212--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--7212--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
+--7212--    object doesn't have a symbol table
+--7212-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--7212--    svma 0x0000003530, avma 0x0004c2d530
+--7212--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--7212--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
+--7212--    object doesn't have a symbol table
+==7212== Adding active redirection:
+--7212--     new: 0x0401b710 (index               ) R-> (2002.0) 0x04c30bc0 index
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x0401b710 (index               ) R-> (2002.0) 0x04c30bc0 index
+--7212--     new: 0x0401b710 (index               ) R-> (2002.0) 0x04c30b80 strchr
+==7212== Adding active redirection:
+--7212--     new: 0x0401b930 (strcmp              ) R-> (2016.0) 0x04c320d0 strcmp
+==7212== WARNING: new redirection conflicts with existing -- ignoring it
+--7212--     old: 0x0401cdc0 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--7212--     new: 0x0401cdc0 (strlen              ) R-> (2007.0) 0x04c31020 strlen
+==7212== Adding active redirection:
+--7212--     new: 0x0401db20 (mempcpy             ) R-> (2029.0) 0x04c35270 mempcpy
+==7212== Adding active redirection:
+--7212--     new: 0x0401dc70 (stpcpy              ) R-> (2020.0) 0x04c342c0 stpcpy
+--7212-- REDIR: 0x401b710 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
+--7212-- REDIR: 0x401b930 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
+--7212-- REDIR: 0x401db20 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
+--7212-- Reading syms from /lib/x86_64-linux-gnu/libc-2.23.so
+--7212--    svma 0x000001f8b0, avma 0x0004e598b0
+--7212--   Considering /lib/x86_64-linux-gnu/libc-2.23.so ..
+--7212--   .. CRC mismatch (computed 2adb2e50 wanted 9b73f606)
+--7212--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so ..
+--7212--   .. CRC is valid
+--7212-- summarise_context(loc_start = 0x34): cannot summarise(why=1):   
+0x52: [0]={ 0(r5) { u  u  u  c0 u  u  r9 r8 u  u  u  u  c16 c24 c32 c40 r1 u  u  u  }
+--7212-- summarise_context(loc_start = 0x35): cannot summarise(why=1):   
+0x7d: [0]={ 0(r5) { u  u  u  c128 u  u  c120 c160 u  u  u  u  c72 c80 c88 c96 c168 u  u  u  }
+--7212-- summarise_context(loc_start = 0x1): cannot summarise(why=2):   
+0x25: [0]={ 0(r7) { u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  r5 u  u  u  }
+--7212-- summarise_context(loc_start = 0x25): cannot summarise(why=2):   
+0x4b: [0]={ 8(r7) { u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  u  r5 u  u  u  }
+--7212-- summarise_context(loc_start = 0x84): cannot summarise(why=1):   
+0xa2: [0]={ 0(r5) { u  u  u  c0 u  u  r9 r8 u  u  u  u  c16 c24 c32 c40 r1 u  u  u  }
+==7212== Adding active redirection:
+--7212--     new: 0x04e73840 (putenv              ) W-> (0000.0) 0x04c35960 putenv
+==7212== Adding active redirection:
+--7212--     new: 0x04e73c90 (setenv              ) W-> (0000.0) 0x04c35aa0 setenv
+==7212== Adding active redirection:
+--7212--     new: 0x04e73cf0 (unsetenv            ) W-> (0000.0) 0x04c35a00 unsetenv
+==7212== Adding active redirection:
+--7212--     new: 0x04ebd550 (malloc              ) R-> (1001.0) 0x04c2db20 malloc
+==7212== Adding active redirection:
+--7212--     new: 0x04ebd850 (malloc_get_state    ) R-> (1018.0) 0x04c2da10 malloc_get_state
+==7212== Adding active redirection:
+--7212--     new: 0x04ebda70 (free                ) R-> (1005.0) 0x04c2ed80 free
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ebda70 (free                ) R-> (1005.0) 0x04c2ed80 free
+--7212--     new: 0x04ebda70 (free                ) R-> (1005.0) 0x04c2ef60 cfree
+==7212== Adding active redirection:
+--7212--     new: 0x04ebdc40 (realloc             ) R-> (1009.0) 0x04c2fce0 realloc
+==7212== Adding active redirection:
+--7212--     new: 0x04ebe020 (memalign            ) R-> (1011.0) 0x04c2ff20 memalign
+==7212== Adding active redirection:
+--7212--     new: 0x04ebe290 (calloc              ) R-> (1007.0) 0x04c2faa0 calloc
+==7212== Adding active redirection:
+--7212--     new: 0x04ebe5f0 (malloc_usable_size  ) R-> (1017.0) 0x04c30240 malloc_usable_size
+==7212== Adding active redirection:
+--7212--     new: 0x04ebe7f0 (mallopt             ) R-> (1014.0) 0x04c2d9a0 mallopt
+==7212== Adding active redirection:
+--7212--     new: 0x04ebf6b0 (malloc_set_state    ) R-> (1018.0) 0x04c2da20 malloc_set_state
+==7212== Adding active redirection:
+--7212--     new: 0x04ebfbe0 (valloc              ) R-> (1012.0) 0x04c30020 valloc
+==7212== Adding active redirection:
+--7212--     new: 0x04ebfe90 (pvalloc             ) R-> (1018.0) 0x04c2da00 pvalloc
+==7212== Adding active redirection:
+--7212--     new: 0x04ec0170 (malloc_trim         ) R-> (1015.0) 0x04c2d9e0 malloc_trim
+==7212== Adding active redirection:
+--7212--     new: 0x04ec0440 (mallinfo            ) R-> (1020.0) 0x04c305c0 mallinfo
+==7212== Adding active redirection:
+--7212--     new: 0x04ec0560 (malloc_stats        ) R-> (1019.0) 0x04c2da30 malloc_stats
+==7212== Adding active redirection:
+--7212--     new: 0x04ec0bd0 (posix_memalign      ) R-> (1016.0) 0x04c300a0 posix_memalign
+==7212== Adding active redirection:
+--7212--     new: 0x04ec2e50 (strcat              ) R-> (2003.0) 0x04c30c00 strcat
+==7212== Adding active redirection:
+--7212--     new: 0x04ec2e90 (__GI_strcat         ) R-> (2003.0) 0x04c30ce0 __GI_strcat
+==7212== Adding active redirection:
+--7212--     new: 0x04ec3050 (index               ) R-> (2002.0) 0x04c30ac0 index
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec3050 (index               ) R-> (2002.0) 0x04c30ac0 index
+--7212--     new: 0x04ec3050 (index               ) R-> (2002.0) 0x04c309c0 strchr
+==7212== Adding active redirection:
+--7212--     new: 0x04ec3080 (__GI_strchr         ) R-> (2002.0) 0x04c30a00 __GI_strchr
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec3080 (__GI_strchr         ) R-> (2002.0) 0x04c30a00 __GI_strchr
+--7212--     new: 0x04ec3080 (__GI_strchr         ) R-> (2002.0) 0x04c30a40 __strchr_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec32a0 (strcmp              ) R-> (2016.0) 0x04c31f90 strcmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ec32e0 (__GI_strcmp         ) R-> (2016.0) 0x04c31fe0 __GI_strcmp
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec32e0 (__GI_strcmp         ) R-> (2016.0) 0x04c31fe0 __GI_strcmp
+--7212--     new: 0x04ec32e0 (__GI_strcmp         ) R-> (2016.0) 0x04c32030 __strcmp_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec4730 (strcpy              ) R-> (2008.0) 0x04c31040 strcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec4770 (__GI_strcpy         ) R-> (2008.0) 0x04c31110 __GI_strcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec4850 (strcspn             ) R-> (2033.0) 0x04c35610 strcspn
+==7212== Adding active redirection:
+--7212--     new: 0x04ec4cf0 (strlen              ) R-> (2007.0) 0x04c30f60 strlen
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec4cf0 (strlen              ) R-> (2007.0) 0x04c30f60 strlen
+--7212--     new: 0x04ec4cf0 (strlen              ) R-> (2007.0) 0x04c30f80 __GI_strlen
+==7212== Adding active redirection:
+--7212--     new: 0x04ec4e90 (strnlen             ) R-> (2006.0) 0x04c30ee0 strnlen
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec4e90 (strnlen             ) R-> (2006.0) 0x04c30ee0 strnlen
+--7212--     new: 0x04ec4e90 (strnlen             ) R-> (2006.0) 0x04c30f20 __GI_strnlen
+==7212== Adding active redirection:
+--7212--     new: 0x04ec50b0 (strncat             ) R-> (2004.0) 0x04c30dc0 strncat
+==7212== Adding active redirection:
+--7212--     new: 0x04ec50f0 (strncmp             ) R-> (2011.0) 0x04c316a0 strncmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ec5140 (__GI_strncmp        ) R-> (2011.0) 0x04c31710 __GI_strncmp
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec5140 (__GI_strncmp        ) R-> (2011.0) 0x04c31710 __GI_strncmp
+--7212--     new: 0x04ec5140 (__GI_strncmp        ) R-> (2011.0) 0x04c31780 __strncmp_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec6990 (strncpy             ) R-> (2009.0) 0x04c311e0 strncpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c308a0 rindex
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c308a0 rindex
+--7212--     new: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c308d0 __GI_strrchr
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c308a0 rindex
+--7212--     new: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c30870 strrchr
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c308a0 rindex
+--7212--     new: 0x04ec69d0 (rindex              ) R-> (2001.0) 0x04c30870 strrchr
+==7212== Adding active redirection:
+--7212--     new: 0x04ec6cc0 (strpbrk             ) R-> (2032.0) 0x04c355b0 strpbrk
+==7212== Adding active redirection:
+--7212--     new: 0x04ec7050 (strspn              ) R-> (2034.0) 0x04c35670 strspn
+==7212== Adding active redirection:
+--7212--     new: 0x04ec7630 (__GI_strstr         ) R-> (2031.0) 0x04c354d0 __strstr_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec7c00 (strstr              ) R-> (2031.0) 0x04c35460 strstr
+==7212== Adding active redirection:
+--7212--     new: 0x04ec7e30 (memchr              ) R-> (2017.0) 0x04c32170 memchr
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec7e30 (memchr              ) R-> (2017.0) 0x04c32170 memchr
+--7212--     new: 0x04ec7e30 (memchr              ) R-> (2017.0) 0x04c321b0 __GI_memchr
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8180 (bcmp                ) R-> (2019.0) 0x04c33d70 bcmp
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec8180 (bcmp                ) R-> (2019.0) 0x04c33d70 bcmp
+--7212--     new: 0x04ec8180 (bcmp                ) R-> (2019.0) 0x04c33af0 memcmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ec81c0 (__GI_memcmp         ) R-> (2019.0) 0x04c33b90 __GI_memcmp
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec81c0 (__GI_memcmp         ) R-> (2019.0) 0x04c33b90 __GI_memcmp
+--7212--     new: 0x04ec81c0 (__GI_memcmp         ) R-> (2019.0) 0x04c33c30 __memcmp_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec85c0 (__GI_memmove        ) R-> (2018.1) 0x04c347e0 __GI_memmove
+==7212== Adding active redirection:
+--7212--     new: 0x04ec871b (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04c32230 memcpy@GLIBC_2.2.5
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec871b (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04c32230 memcpy@GLIBC_2.2.5
+--7212--     new: 0x04ec871b (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04c34570 memmove
+==7212== Ignoring lower priority redirection:
+--7212--     old: 0x04ec871b (memcpy@GLIBC_2.2.5  ) R-> (2018.1) 0x04c32230 memcpy@GLIBC_2.2.5
+--7212--     new: 0x04ec871b (memcpy@GLIBC_2.2.5  ) R-> (2018.0) 0x04c327d0 memcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8780 (memset              ) R-> (2021.0) 0x04c344c0 memset
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8900 (mempcpy             ) R-> (2029.0) 0x04c34eb0 mempcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8980 (__GI_mempcpy        ) R-> (2029.0) 0x04c34fa0 __GI_mempcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8de0 (bcopy               ) R-> (2023.0) 0x04c34cc0 bcopy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8e20 (stpcpy              ) R-> (2020.0) 0x04c33eb0 stpcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8e60 (__GI_stpcpy         ) R-> (2020.0) 0x04c33f80 __GI_stpcpy
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec8e60 (__GI_stpcpy         ) R-> (2020.0) 0x04c33f80 __GI_stpcpy
+--7212--     new: 0x04ec8e60 (__GI_stpcpy         ) R-> (2020.0) 0x04c34050 __stpcpy_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8f40 (stpncpy             ) R-> (2042.0) 0x04c34390 stpncpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8f80 (strcasecmp_l        ) R-> (2014.0) 0x04c31ae0 strcasecmp_l
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ec8f80 (strcasecmp_l        ) R-> (2014.0) 0x04c31ae0 strcasecmp_l
+--7212--     new: 0x04ec8f80 (strcasecmp_l        ) R-> (2014.0) 0x04c31b70 __GI_strcasecmp_l
+==7212== Adding active redirection:
+--7212--     new: 0x04ec8fd0 (strcasecmp          ) R-> (2012.0) 0x04c31860 strcasecmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ec9040 (__GI___strcasecmp_l ) R-> (2014.0) 0x04c31c00 __GI___strcasecmp_l
+==7212== Adding active redirection:
+--7212--     new: 0x04ecb270 (strncasecmp_l       ) R-> (2015.0) 0x04c31c90 strncasecmp_l
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ecb270 (strncasecmp_l       ) R-> (2015.0) 0x04c31c90 strncasecmp_l
+--7212--     new: 0x04ecb270 (strncasecmp_l       ) R-> (2015.0) 0x04c31d90 __GI_strncasecmp_l
+==7212== Adding active redirection:
+--7212--     new: 0x04ecb2c0 (strncasecmp         ) R-> (2013.0) 0x04c31940 strncasecmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ecb330 (__GI___strncasecmp_l) R-> (2015.0) 0x04c31e90 __GI___strncasecmp_l
+==7212== Adding active redirection:
+--7212--     new: 0x04ecd9c0 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04c324a0 memcpy@@GLIBC_2.14
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ecd9c0 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04c324a0 memcpy@@GLIBC_2.14
+--7212--     new: 0x04ecd9c0 (memcpy@@GLIBC_2.14  ) R-> (2018.0) 0x04c327d0 memcpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ecda40 (__GI_memcpy         ) R-> (2018.0) 0x04c32b00 __GI_memcpy
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ecda40 (__GI_memcpy         ) R-> (2018.0) 0x04c32b00 __GI_memcpy
+--7212--     new: 0x04ecda40 (__GI_memcpy         ) R-> (2018.0) 0x04c32e30 __memcpy_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04ecea50 (strcasestr          ) R-> (2035.0) 0x04c356e0 strcasestr
+==7212== Adding active redirection:
+--7212--     new: 0x04ecfb20 (rawmemchr           ) R-> (2026.0) 0x04c34dd0 rawmemchr
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ecfb20 (rawmemchr           ) R-> (2026.0) 0x04c34dd0 rawmemchr
+--7212--     new: 0x04ecfb20 (rawmemchr           ) R-> (2026.0) 0x04c34df0 __GI___rawmemchr
+==7212== Adding active redirection:
+--7212--     new: 0x04ecfd30 (strchrnul           ) R-> (2025.0) 0x04c34da0 strchrnul
+==7212== Adding active redirection:
+--7212--     new: 0x04ed8450 (memrchr             ) R-> (2036.0) 0x04c321f0 memrchr
+==7212== Adding active redirection:
+--7212--     new: 0x04ed8af0 (__GI_strncpy        ) R-> (2009.0) 0x04c31310 __GI_strncpy
+==7212== Ignoring duplicate redirection:
+--7212--     old: 0x04ed8af0 (__GI_strncpy        ) R-> (2009.0) 0x04c31310 __GI_strncpy
+--7212--     new: 0x04ed8af0 (__GI_strncpy        ) R-> (2009.0) 0x04c31440 __strncpy_sse2
+==7212== Adding active redirection:
+--7212--     new: 0x04edf5d0 (__strncpy_sse2_unali) R-> (2009.0) 0x04c31570 __strncpy_sse2_unaligned
+==7212== Adding active redirection:
+--7212--     new: 0x04ee05b0 (__stpcpy_sse2_unalig) R-> (2020.0) 0x04c34120 __stpcpy_sse2_unaligned
+==7212== Adding active redirection:
+--7212--     new: 0x04ee43f0 (wcschr              ) R-> (2040.0) 0x04c35900 wcschr
+==7212== Adding active redirection:
+--7212--     new: 0x04ee4580 (wcscmp              ) R-> (2038.0) 0x04c357e0 wcscmp
+==7212== Adding active redirection:
+--7212--     new: 0x04ee5250 (wcscpy              ) R-> (2039.0) 0x04c35830 wcscpy
+==7212== Adding active redirection:
+--7212--     new: 0x04ee5310 (wcslen              ) R-> (2037.0) 0x04c357c0 wcslen
+==7212== Adding active redirection:
+--7212--     new: 0x04ee58a0 (wcsrchr             ) R-> (2041.0) 0x04c35930 wcsrchr
+==7212== Adding active redirection:
+--7212--     new: 0x04f4f950 (__memcpy_chk        ) R-> (2030.0) 0x04c35360 __memcpy_chk
+==7212== Adding active redirection:
+--7212--     new: 0x04f4f9e0 (__memmove_chk       ) R-> (2024.0) 0x04c34d20 __memmove_chk
+==7212== Adding active redirection:
+--7212--     new: 0x04f4fb00 (__stpcpy_chk        ) R-> (2028.0) 0x04c34e60 __stpcpy_chk
+==7212== Adding active redirection:
+--7212--     new: 0x04f4fbc0 (__strcpy_chk        ) R-> (2027.0) 0x04c34e10 __strcpy_chk
+==7212== Adding active redirection:
+--7212--     new: 0x04f7e510 (__strcmp_sse42      ) R-> (2016.0) 0x04c32080 __strcmp_sse42
+==7212== Adding active redirection:
+--7212--     new: 0x04f7f2c0 (__strncmp_sse42     ) R-> (2011.0) 0x04c317f0 __strncmp_sse42
+==7212== Adding active redirection:
+--7212--     new: 0x04fa7c60 (__memcmp_sse4_1     ) R-> (2019.0) 0x04c33cd0 __memcmp_sse4_1
+==7212== Adding active redirection:
+--7212--     new: 0x04faa0d0 (__strchr_sse2_no_bsf) R-> (2002.0) 0x04c30a80 __strchr_sse2_no_bsf
+--7212-- REDIR: 0x4ec8fd0 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f841b0 (__strcasecmp_avx    ) R-> (2012.0) 0x04c31860 strcasecmp
+--7212-- REDIR: 0x4ec4850 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f83e20 (__strcspn_sse42     ) R-> (2033.0) 0x04c35610 strcspn
+--7212-- REDIR: 0x4ecb2c0 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f85820 (__strncasecmp_avx   ) R-> (2013.0) 0x04c31940 strncasecmp
+--7212-- REDIR: 0x4ec6cc0 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f83f60 (__strpbrk_sse42     ) R-> (2032.0) 0x04c355b0 strpbrk
+--7212-- REDIR: 0x4ec7050 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f84090 (__strspn_sse42      ) R-> (2034.0) 0x04c35670 strspn
+--7212-- REDIR: 0x4ec871b (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04f97c90 (__memmove_ssse3_back) R-> (2018.1) 0x04c32230 memcpy@GLIBC_2.2.5
+--7212-- REDIR: 0x4ec69d0 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
+--7212-- REDIR: 0x4ebd550 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
+--7212-- REDIR: 0x4ec4730 (libc.so.6:strcpy) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04edefa0 (__strcpy_sse2_unalig) R-> (2008.0) 0x04c31040 strcpy
+--7212-- REDIR: 0x4edefa0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c31040 (strcpy)
+--7212-- REDIR: 0x4ec2e50 (libc.so.6:strcat) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04ee1dc0 (__strcat_sse2_unalig) R-> (2003.0) 0x04c30c00 strcat
+--7212-- REDIR: 0x4ee1dc0 (libc.so.6:__strcat_sse2_unaligned) redirected to 0x4c30c00 (strcat)
+--7212-- REDIR: 0x4ebda70 (libc.so.6:free) redirected to 0x4c2ed80 (free)
+--7212-- REDIR: 0x4ec4cf0 (libc.so.6:strlen) redirected to 0x4c30f60 (strlen)
+--7212-- REDIR: 0x4ecfd30 (libc.so.6:strchrnul) redirected to 0x4c34da0 (strchrnul)
+--7212-- REDIR: 0x4ec8980 (libc.so.6:__GI_mempcpy) redirected to 0x4c34fa0 (__GI_mempcpy)
+--7212-- REDIR: 0x4ec7630 (libc.so.6:__GI_strstr) redirected to 0x4c354d0 (__strstr_sse2)
+--7212-- REDIR: 0x4ecda40 (libc.so.6:__GI_memcpy) redirected to 0x4c32b00 (__GI_memcpy)
+--7212-- REDIR: 0x4ec32a0 (libc.so.6:strcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+==7212== Adding active redirection:
+--7212--     new: 0x04ed8b40 (__strcmp_sse2_unalig) R-> (2016.0) 0x04c31f90 strcmp
+--7212-- REDIR: 0x4ed8b40 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c31f90 (strcmp)
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x5237a74 is 0 bytes after a block of size 208,116 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x5269040 is 0 bytes after a block of size 52,624 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x528b317 is 0 bytes after a block of size 57,895 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+--7212-- Caught __NR_exit; running __libc_freeres()
+==7212== 
+==7212== HEAP SUMMARY:
+==7212==     in use at exit: 226,800 bytes in 1,134 blocks
+==7212==   total heap usage: 1,154 allocs, 20 frees, 562,387 bytes allocated
+==7212== 
+==7212== Searching for pointers to 1,134 not-freed blocks
+--7212--   Scanning root segment: 0x603000..0x603fff (4096)
+--7212--   Scanning root segment: 0x4026000..0x4027fff (8192)
+--7212--   Scanning root segment: 0x403d000..0x403efff (8192)
+--7212--   Scanning root segment: 0x4226000..0x4226fff (4096)
+--7212--   Scanning root segment: 0x4227000..0x4227fff (4096)
+--7212--   Scanning root segment: 0x4228000..0x4228fff (4096)
+--7212--   Scanning root segment: 0x4c29000..0x4c29fff (4096)
+--7212--   Scanning root segment: 0x4e39000..0x4e39fff (4096)
+--7212--   Scanning root segment: 0x51fd000..0x51fefff (8192)
+--7212--   Scanning root segment: 0x51ff000..0x5202fff (16384)
+--7212--   Scanning root segment: 0xffeffd000..0xfff000fff (16384)
+==7212== Checked 65,944 bytes
+==7212== 
+==7212== 28,200 bytes in 141 blocks are definitely lost in loss record 1 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x401411: extractTheLinks (isvalid.c:256)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 28,200 bytes in 141 blocks are definitely lost in loss record 2 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400FB9: getTheLink (isvalid.c:170)
+==7212==    by 0x401428: extractTheLinks (isvalid.c:257)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 32,200 bytes in 161 blocks are definitely lost in loss record 3 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x401411: extractTheLinks (isvalid.c:256)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 32,200 bytes in 161 blocks are definitely lost in loss record 4 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400FB9: getTheLink (isvalid.c:170)
+==7212==    by 0x401428: extractTheLinks (isvalid.c:257)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 53,000 bytes in 265 blocks are definitely lost in loss record 5 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x401411: extractTheLinks (isvalid.c:256)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 53,000 bytes in 265 blocks are definitely lost in loss record 6 of 6
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400FB9: getTheLink (isvalid.c:170)
+==7212==    by 0x401428: extractTheLinks (isvalid.c:257)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== LEAK SUMMARY:
+==7212==    definitely lost: 226,800 bytes in 1,134 blocks
+==7212==    indirectly lost: 0 bytes in 0 blocks
+==7212==      possibly lost: 0 bytes in 0 blocks
+==7212==    still reachable: 0 bytes in 0 blocks
+==7212==         suppressed: 0 bytes in 0 blocks
+==7212== 
+==7212== ERROR SUMMARY: 9 errors from 9 contexts (suppressed: 0 from 0)
+==7212== 
+==7212== 1 errors in context 1 of 9:
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x528b317 is 0 bytes after a block of size 57,895 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 
+==7212== 1 errors in context 2 of 9:
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x5269040 is 0 bytes after a block of size 52,624 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x401834: crawlItBaby (isvalid.c:371)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== 
+==7212== 1 errors in context 3 of 9:
+==7212== Invalid read of size 1
+==7212==    at 0x4014CB: extractTheLinks (isvalid.c:251)
+==7212==    by 0x401776: crawlItBaby (isvalid.c:354)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212==  Address 0x5237a74 is 0 bytes after a block of size 208,116 alloc'd
+==7212==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==7212==    by 0x400D40: readTheFile (isvalid.c:96)
+==7212==    by 0x40172D: crawlItBaby (isvalid.c:345)
+==7212==    by 0x40190F: main (isvalid.c:391)
+==7212== 
+==7212== ERROR SUMMARY: 9 errors from 9 contexts (suppressed: 0 from 0)
