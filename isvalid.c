@@ -8,7 +8,7 @@
 #define MAX_DEPTH '3' 
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 200
-
+#define MAX_LINKS_ALLOWED 20
 int isValidUrl(char *url){
 	
 	char *command = (char *)malloc(sizeof(char)*1000);
@@ -98,6 +98,7 @@ char* readTheFile(char *fileName){
             fread(buffer,1,length,fp);
         fclose(fp);
         buffer[length]=null;
+	//	fclose(fp);
 
     }
     else
@@ -247,30 +248,42 @@ int isBaseCorrect(char *word,char *base){
 int extractTheLinks(char *buffer,char *link[MAX_LINKS],int linkCounter){
 
     int i=0;
-    int c=1;
+  
+	int counter=0;
+	
     while(buffer[i]!=null){
 
         if(findOpenAnchorTag(buffer,&i) && traverseUntilHref(buffer,&i)){
 
             int j=0;
-            char *word=(char *)malloc(sizeof(char)*MAX_LINK_SIZE);
+            char *word;
+			
+			
             word = getTheLink(buffer,&i);
             if(isLinkValid(word) && (j=closingAnchorTagPresent(buffer,i)) && isUnique(link,linkCounter,word) && ( linkCounter? isBaseCorrect(word,link[0]): 1)){
-
+				
                 i=j;
 
                 link[linkCounter] =  word;
+				   
                 linkCounter++;
+				if(++counter==MAX_LINKS_ALLOWED)
+					break;
+				
 
             }
-            else{}
-             //   free(word);
+            else
+                free(word);
+				
+			
+			
 
         }
 
 
         i++;
     }
+
     return linkCounter;
 
 
@@ -284,21 +297,15 @@ char *downloadTheHtmlFile(char *url,char *dir,int counter){
 	
 	printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
-	printf("\ngibving add t caommand %u\n",command);
+
 	char *fileName;
 	
 	char *space = " ";
 	fileName = (char *)malloc(sizeof(char)*100);
-	printf("\ngiving ch add %u\n",fileName);
 	sprintf(fileName,"/index%d.html",counter);
-	
-	
-
 	sprintf(command,"wget -O ");
 	
 	strcat(command,dir);
-	
-	//printf("url in download function is %s",url);
 	
 	strcat(command,fileName);
 	strcat(command,space);
@@ -319,6 +326,13 @@ void crawlItBaby(char *url,char *dir,int depth,char *links[MAX_LINKS],int counte
 	if(!depth){
 		for(int i=0;i<counter;i++)
       printf("%3d %s\n",i+1,links[i]);
+		
+		for(int i=0;i<counter;i++)
+			free(links[i]);
+		
+			
+		
+		
 		return;
 
 	}
@@ -334,40 +348,26 @@ void crawlItBaby(char *url,char *dir,int depth,char *links[MAX_LINKS],int counte
     
 	sprintf(file,"%s",dir);
 	strcat(file,ch);
+	free(ch);
 
-	
-	
-	printf("\nfile saved %s\n ",file);
-	
-
-	printf("calling readFunction %s \n",file);
-	
 	html = readTheFile(file);
-	printf("\nfffreeing file\n");
-	free(file);
-	printf("\nfffreed file\n");	   
-		   
 	
-	printf("called readFunction");
+	free(file);
+
 
 	
     success = extractTheLinks(html,links,counter);
-printf("\nfreeing html\n");
+
 	free(html);
-	   printf("\nfreed html\n");
-    printf("links found++++++ were %d\n\n",success);
+    printf("\nlinks found++++++ were %d\n\n",success);
 
 
     if(!success){
         printf("no links were found");
     }
 
-		printf("\nfreeing ch\n");
-	printf("\ngiving ch add %u\n",ch);
-	free(ch);
-		   printf("\nffffreed ch\n");
 	
-	//fflush(stdin);
+	
 	crawlItBaby(links[counter+1],dir,depth-1,links,success);
 	
 
@@ -387,6 +387,7 @@ void main(int argc,char *argv[]){
 		if(isValidDir(argv[2])){
 			
 			if(depth=isValidDepth(argv[3])){
+			
 				printf("###################ENGINE STARTING######################################\n\n\n");
 				crawlItBaby(argv[1],argv[2],depth,links,linkCounter);
 			}
