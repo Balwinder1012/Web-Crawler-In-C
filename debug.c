@@ -9,59 +9,105 @@
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 100
 
-char *downloadTheHtmlFile(int counter){
-	
-	printf("############DOWNLOADING FILE####################\n");
-	char *command = malloc(sizeof(char)*200);
-	printf("\ngibving add t caommand\n");
-	char *fileName;
-	
-	char *space = " ";
-	fileName = (char *)malloc(sizeof(char)*100);
-	printf("\ngiving ch add \n");
-	sprintf(fileName,"/index%d.html",counter);
-	
-	
+typedef struct node{
 
-	sprintf(command,"wget -O ");
+	int isVisited;
+	char *link;
+	char *seedUrl;
+	struct node *next;
+	struct node *prev;
+
+
+}LINKS;
+
+LINKS *head=NULL;
+
+void insertInList(char *link,char *seedUrl){
+
+	LINKS *node = (LINKS *)malloc(sizeof(LINKS));
+	LINKS *temp;
+	node->link = link;
+	node->seedUrl = seedUrl;
+	node->isVisited = 0;
+	node->next = NULL;
+	if(head==NULL){
+		head = node;
+		
+		node->prev = NULL;
 	
-	//strcat(command,dir);
-	
-	//printf("url in download function is %s",url);
-	
-	strcat(command,fileName);
-	strcat(command,space);
-	//strcat(command,url);
-//	system(command);
-	printf("\nfreeing command \n");
-	free(command);
-	printf("\n freed command\n");
-	
-	printf("############ FILE DOWNLOADED	####################\n");
-	
-	return fileName;
+	}
+	else{
+		temp = head;
+		
+		while(temp->next!=NULL)
+			temp = temp->next;
+		
+		
+		temp->next = node;
+		node->prev = temp;
+
+	}
+
 
 }
+void printAll(){
+	
+	LINKS *ptr;
+	ptr = head;
+	while(ptr!=NULL){
+		printf("link = %s seedLink = %s\n",ptr->link,ptr->seedUrl);
+		ptr=ptr->next;
+	}
 
+	
+}
 int main(){
-
-	char *u;
-	u = downloadTheHtmlFile(1);
-	free(u);
-	u = downloadTheHtmlFile(2);
-	free(u);
-	u = downloadTheHtmlFile(1);
-	free(u);
-	u = downloadTheHtmlFile(2);
-	free(u);
-	u = downloadTheHtmlFile(1);
-	free(u);
-	u = downloadTheHtmlFile(2);
-	free(u);
-	u = downloadTheHtmlFile(1);
-	free(u);
-	u = downloadTheHtmlFile(2);
-	free(u);
-	return 0;
 	
+	char *link;
+	char *seedUrl;
+	
+	
+	link = (char *)malloc(sizeof(char)*100);
+	seedUrl  = (char *)malloc(sizeof(char)*100);
+	sprintf(link,"google.com");
+	sprintf(seedUrl,"sgoogle.com");
+	insertInList(link,seedUrl);
+	//free(link);
+	//free(seedUrl);
+	
+	link = (char *)malloc(sizeof(char)*100);
+	seedUrl = (char *)malloc(sizeof(char)*100);
+	sprintf(link,"yahoo.com");
+	sprintf(seedUrl,"syahoo.com");
+	insertInList(link,seedUrl);
+//	free(link);
+//	free(seedUrl);
+	
+	
+	link = (char *)malloc(sizeof(char)*100);
+	seedUrl  = (char *)malloc(sizeof(char)*100);
+	sprintf(link,"orkut.com");
+	sprintf(seedUrl,"sorkut.com");
+	insertInList(link,seedUrl);
+//	//free(link);
+//	free(seedUrl);
+	
+	
+	
+	link = (char *)malloc(sizeof(char)*100);
+	seedUrl = (char *)malloc(sizeof(char)*100);
+	sprintf(link,"fb.com");
+	sprintf(seedUrl,"sfb.com");
+	insertInList(link,seedUrl);
+//	free(link);
+//	free(seedUrl);
+	
+	
+	
+	
+	printAll();
+	
+
+
 }
+
