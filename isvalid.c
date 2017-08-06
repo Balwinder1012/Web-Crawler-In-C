@@ -8,7 +8,7 @@
 #define MAX_DEPTH '3' 
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 200
-#define MAX_LINKS_ALLOWED 5
+#define MAX_LINKS_ALLOWED 2
 
 typedef struct node{
 
@@ -59,7 +59,7 @@ int printAll(){
 	int noOfLinks=0;
 	ptr = head;
 	while(ptr!=NULL){
-		//printf("link = %s seedLink = %s\n",ptr->link,ptr->seedUrl);
+		printf("link = %s \t seedLink = %s depth = %d\n",ptr->link,ptr->seedUrl,ptr->depth);
 		noOfLinks++;
 		ptr=ptr->next;
 	}
@@ -234,6 +234,10 @@ char* getTheLink(char *ch,int *i){
 
         word[index++]=ch[*i];
         *i = *i +1;
+		if(index==MAX_LINK_SIZE){
+			word[0]='\0';
+			return word;
+		}
     }
     if(ch[*i]=='"'){
         word[index]=null;
@@ -296,15 +300,43 @@ int isUnique(char *links[MAX_LINKS],int linkCounter,char *word){
     
 
 }
+int isUniqueInList(char *url){
+	
+	LINKS *ptr;
+	for(ptr=head;ptr!=NULL;ptr=ptr->next){
+		
+		if(!strcmp(ptr->link,url))
+			return 0;
+	
+	}
+	return 1;
+
+
+}
+
 int isBaseCorrect(char *word,char *base){
-	for(int i=0;base[i]!=null;i++){
-		if(word[i]!=base[i])
+	
+	int i=0;
+	int k=0;
+	while(word[i]!=null && word[i]!='/' && word[i+1]!='/')
+		i++;
+	k=i;
+	
+	i=i+3;
+	
+	//jmit.ac.in
+	//http://jmit.ac.in/
+	
+	//printf("\n%s %s %d\n",word,base,abs(strlen(base)+7-strlen(word)));
+	
+	for(int j=0;base[j]!=null;j++){
+		if(word[i++]!=base[j] || abs(strlen(base)+7-strlen(word))<2)
 			return 0;
 	}
 	return 1;
 
 }
-int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS]){
+int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS],char *seedUrl){
 
     int i=0;
   
@@ -319,7 +351,7 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS]){
 			
 			
             word = getTheLink(buffer,&i);
-            if(isLinkValid(word) && (j=closingAnchorTagPresent(buffer,i)) && isUnique(linkArr,counter,word) && /* ( linkCounter? isBaseCorrect(word,link[0]):*/ 1){
+            if(isLinkValid(word) && (j=closingAnchorTagPresent(buffer,i)) && isUniqueInList(word) && isBaseCorrect(word,seedUrl)){
 				
                 i=j;
 
@@ -333,9 +365,6 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS]){
             }
             else
                 free(word);
-				
-			
-			
 
         }
 
@@ -344,8 +373,6 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS]){
     }
 
     return counter;
-
-
 
 }
 
@@ -404,18 +431,12 @@ void downloadFilesFromList(char *dir){
 
 
 }
-void crawlItBaby(char *url,char *dir,int depth,int isSeed){
+void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 
 	char *linksArr[MAX_LINKS_ALLOWED];
 	if(!depth){
-
-		printf("LINKS FOUND %d\n\n",printAll());
-		downloadFilesFromList(dir);
-			
+		return;
 		
-		
-		exit(1);
-
 	}
 	printf("#########################CRAWLING START for url %s##############################\n",url);
 	char *ch;
@@ -424,7 +445,7 @@ void crawlItBaby(char *url,char *dir,int depth,int isSeed){
 	int success=0;
 	
 	// 1 is for seed url and 0 is  a neccessary evil
-	ch=downloadTheHtmlFile(url,dir,depth,isSeed,0);
+	ch=downloadTheHtmlFile(url,dir,depth,1,0);
 
 	file = malloc(sizeof(char)*(strlen(ch)+strlen(dir)+10));
     
@@ -438,30 +459,39 @@ void crawlItBaby(char *url,char *dir,int depth,int isSeed){
 
 
 	
-    success = extractTheLinks(html,linksArr);
+    success = extractTheLinks(html,linksArr,seedUrl);
+	printf("\n\n");
+	for(int i=0;i<success;i++){ 
+		printf("%s\n",linksArr[i]);
+	}
 	
 	for(int i=0;i<success;i++){
-		insertInList(linksArr[i],url,depth);
-		//free(linksArr[i]);
+		//if(isUniqueInList(linksArr[i]))
+			insertInList(linksArr[i],url,depth);
 	}
 
 	
 	free(html);
     printf("\nlinks found++++++ were %d\n\n",success);
 
-	
-
     if(!success){
         printf("no links were found");
     }
 
+	/*
 	LINKS *temp;
 	temp = head;
+	
 	while(temp!=NULL){
 		if(temp->isVisited==0)
-			crawlItBaby(temp->link,dir,depth-1);
+			crawlItBaby(seedUrl,temp->link,dir,depth-1);
+		temp=temp->next;
 	
+	}*/
+	for(int i=0;i<success;i++){
+		crawlItBaby(seedUrl,linksArr[i],dir,depth-1);
 	}
+	
 
 	
 	
@@ -471,10 +501,7 @@ void main(int argc,char *argv[]){
 	
 	int depth;
 	char linkCounter=0;
-	//LINKS *links[MAX_LINKS];
 
-
-	
 	if(isValidUrl(argv[1])){
 		
 		if(isValidDir(argv[2])){
@@ -482,7 +509,10 @@ void main(int argc,char *argv[]){
 			if(depth=isValidDepth(argv[3])){
 			
 				printf("###################ENGINE STARTING######################################\n\n\n");
-				crawlItBaby(argv[1],argv[2],depth,1);
+				crawlItBaby(argv[1],argv[1],argv[2],depth);
+				printf("LINKS FOUND %d\n\n",printAll());
+				downloadFilesFromList(argv[2]);
+				exit(1);
 			}
 			else
 				printf("\ninvalid depth --Depth should be greater than 0 and less than %d\n",(MAX_DEPTH-'0') + 1);
