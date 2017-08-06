@@ -8,13 +8,14 @@
 #define MAX_DEPTH '3' 
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 200
-#define MAX_LINKS_ALLOWED 20
+#define MAX_LINKS_ALLOWED 5
 
 typedef struct node{
 
 	int isVisited;
 	char *link;
 	char *seedUrl;
+	int depth;
 	struct node *next;
 	struct node *prev;
 
@@ -23,12 +24,13 @@ typedef struct node{
 
 LINKS *head=NULL;
 
-void insertInList(char *link,char *seedUrl){
+void insertInList(char *link,char *seedUrl,int depth){
 
 	LINKS *node = (LINKS *)malloc(sizeof(LINKS));
 	LINKS *temp;
 	node->link = link;
 	node->seedUrl = seedUrl;
+	node->depth = depth;
 	node->isVisited = 0;
 	node->next = NULL;
 	if(head==NULL){
@@ -155,7 +157,7 @@ char* readTheFile(char *fileName){
             fread(buffer,1,length,fp);
         fclose(fp);
         buffer[length]=null;
-		fclose(fp);
+		
 
     }
     else
@@ -350,7 +352,7 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS]){
 
 
 /*##########################################################################################################################################*/
-char *downloadTheHtmlFile(char *url,char *dir,int counter){
+char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCounter){
 	
 	printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
@@ -359,7 +361,13 @@ char *downloadTheHtmlFile(char *url,char *dir,int counter){
 	
 	char *space = " ";
 	fileName = (char *)malloc(sizeof(char)*100);
-	sprintf(fileName,"/index%d.html",counter);
+	if(isSeed){
+		sprintf(fileName,"/seedForDepth%d.html",depth);
+		
+	}
+	else{
+		sprintf(fileName,"/index%d_%d.html",fileCounter,depth);
+	}
 	sprintf(command,"wget -O ");
 	
 	strcat(command,dir);
@@ -377,14 +385,32 @@ char *downloadTheHtmlFile(char *url,char *dir,int counter){
 	return fileName;
 
 }
+void downloadFilesFromList(char *dir){
+	
+	LINKS *temp = head;
+	LINKS *temp2;
 
-void crawlItBaby(char *url,char *dir,int depth){
+	char *fname;
+	int counter=0;
+	while(temp!=NULL){
+		temp2 = temp;
+		fname = downloadTheHtmlFile(temp->link,dir,temp->depth,0,++counter);
+		temp=temp->next;
+		free(fname);
+		free(temp2->link);
+		free(temp2);
+		
+	}
+
+
+}
+void crawlItBaby(char *url,char *dir,int depth,int isSeed){
 
 	char *linksArr[MAX_LINKS_ALLOWED];
 	if(!depth){
 
-		printf("LINKS FOUND %d",printAll());
-		
+		printf("LINKS FOUND %d\n\n",printAll());
+		downloadFilesFromList(dir);
 			
 		
 		
@@ -397,7 +423,8 @@ void crawlItBaby(char *url,char *dir,int depth){
 	char *html;
 	int success=0;
 	
-	ch=downloadTheHtmlFile(url,dir,depth);
+	// 1 is for seed url and 0 is  a neccessary evil
+	ch=downloadTheHtmlFile(url,dir,depth,isSeed,0);
 
 	file = malloc(sizeof(char)*(strlen(ch)+strlen(dir)+10));
     
@@ -413,22 +440,21 @@ void crawlItBaby(char *url,char *dir,int depth){
 	
     success = extractTheLinks(html,linksArr);
 	
-	for(int i=0;i<success;i++)
-		insertInList(linksArr[i],url);
+	for(int i=0;i<success;i++){
+		insertInList(linksArr[i],url,depth);
+		//free(linksArr[i]);
+	}
 
 	
 	free(html);
     printf("\nlinks found++++++ were %d\n\n",success);
 
+	
 
     if(!success){
         printf("no links were found");
     }
 
-	
-	/*for(int i=counter;i<counter+success;i++)
-		if(links[i]->isVisited==0)
-		 	crawlItBaby(links[i]->link,dir,depth-1);*/
 	LINKS *temp;
 	temp = head;
 	while(temp!=NULL){
@@ -456,7 +482,7 @@ void main(int argc,char *argv[]){
 			if(depth=isValidDepth(argv[3])){
 			
 				printf("###################ENGINE STARTING######################################\n\n\n");
-				crawlItBaby(argv[1],argv[2],depth);
+				crawlItBaby(argv[1],argv[2],depth,1);
 			}
 			else
 				printf("\ninvalid depth --Depth should be greater than 0 and less than %d\n",(MAX_DEPTH-'0') + 1);
