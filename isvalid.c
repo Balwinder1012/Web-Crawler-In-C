@@ -8,7 +8,7 @@
 #define MAX_DEPTH '3' 
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 200
-#define MAX_LINKS_ALLOWED 2
+#define MAX_LINKS_ALLOWED 5
 
 typedef struct node{
 
@@ -63,7 +63,7 @@ int printAll(){
 		noOfLinks++;
 		ptr=ptr->next;
 	}
-	//printf("\n\nLINKS FOUND %d\n\n",noOfLinks);
+
 	return noOfLinks;
 	
 }
@@ -167,6 +167,7 @@ char* readTheFile(char *fileName){
     return buffer;
 
 }
+
 int findOpenAnchorTag(char *ch,int *i){
 
     int j=*i;
@@ -318,16 +319,16 @@ int isBaseCorrect(char *word,char *base){
 	
 	int i=0;
 	int k=0;
-	while(word[i]!=null && word[i]!='/' && word[i+1]!='/')
+	while((word[i]!=null && word[i]!='/' && word[i+1]!='/' ))
 		i++;
 	k=i;
 	
 	i=i+3;
+
 	
-	//jmit.ac.in
-	//http://jmit.ac.in/
+	if(word[i]=='w' && word[i+1]=='w' && word[i+2]=='w' && word[i+3]=='.')
+		i = i +4;
 	
-	//printf("\n%s %s %d\n",word,base,abs(strlen(base)+7-strlen(word)));
 	
 	for(int j=0;base[j]!=null;j++){
 		if(word[i++]!=base[j] || abs(strlen(base)+7-strlen(word))<2)
@@ -358,8 +359,11 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS],char *seedUrl){
                 linkArr[counter] =  word;
 				   
                 counter++;
-				if(counter==MAX_LINKS_ALLOWED)
+				if(counter==MAX_LINKS_ALLOWED){
+					printf("\nbreaking %d\n",MAX_LINKS_ALLOWED);
 					break;
+				}
+				
 				
 
             }
@@ -379,7 +383,7 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS],char *seedUrl){
 
 
 /*##########################################################################################################################################*/
-char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCounter){
+char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCounter,char *seedUrl){
 	
 	printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
@@ -387,23 +391,60 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCount
 	char *fileName;
 	
 	char *space = " ";
-	fileName = (char *)malloc(sizeof(char)*100);
-	if(isSeed){
-		sprintf(fileName,"/seedForDepth%d.html",depth);
-		
-	}
-	else{
-		sprintf(fileName,"/index%d_%d.html",fileCounter,depth);
-	}
+	
+	
+	fileName = (char *)malloc(sizeof(char)*130);
+	sprintf(fileName,"%s/temp%d.txt",dir,depth);
+	
+	
 	sprintf(command,"wget -O ");
 	
-	strcat(command,dir);
+	//strcat(command,dir);
 	
 	strcat(command,fileName);
 	strcat(command,space);
 	strcat(command,url);
 	system(command);
 	
+	if(!isSeed){
+	/*char *file;
+	file = malloc(sizeof(char)*(strlen(ch)+strlen(dir)+10));
+    
+	sprintf(file,"%s",dir);
+	strcat(file,fileName);
+	*/
+	FILE *fp;
+	fp = fopen(fileName,"r");
+		
+	
+	char *appendThisString = (char *)malloc(sizeof(char)*300);
+	sprintf(appendThisString,"<!--URL - %s ## Depth - %d ## SeedUrl - %s-->\n\n",url,depth,seedUrl);
+	if(fp){
+		
+		FILE *newFile;
+		sprintf(fileName,"%s/index%d_%d.html",dir,fileCounter,depth);
+		newFile = fopen(fileName,"w");
+		
+		char ch;
+		int i=0;
+		while(appendThisString[i]!=null)
+			fputc(appendThisString[i++],newFile);
+		
+		while((ch=fgetc(fp))!=EOF)
+			fputc(ch,newFile);
+		
+		free(appendThisString);
+		fclose(newFile);
+		fclose(fp);
+	
+	}
+	else{
+		printf("\nerror in opening file\n");
+		
+	}
+	
+	}
+
 	free(command);
 
 	
@@ -420,13 +461,19 @@ void downloadFilesFromList(char *dir){
 	char *fname;
 	int counter=0;
 	while(temp!=NULL){
-		temp2 = temp;
-		fname = downloadTheHtmlFile(temp->link,dir,temp->depth,0,++counter);
+		
+		fname = downloadTheHtmlFile(temp->link,dir,temp->depth,0,++counter,temp->seedUrl);
 		temp=temp->next;
 		free(fname);
-		free(temp2->link);
-		free(temp2);
 		
+	}
+	temp=head;
+	while(temp!=NULL){
+		temp2=temp;
+		free(temp->link);
+		temp=temp->next;
+		
+		free(temp2);
 	}
 
 
@@ -445,13 +492,9 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 	int success=0;
 	
 	// 1 is for seed url and 0 is  a neccessary evil
-	ch=downloadTheHtmlFile(url,dir,depth,1,0);
+	file=downloadTheHtmlFile(url,dir,depth,1,0,url);
 
-	file = malloc(sizeof(char)*(strlen(ch)+strlen(dir)+10));
-    
-	sprintf(file,"%s",dir);
-	strcat(file,ch);
-	free(ch);
+	
 
 	html = readTheFile(file);
 	

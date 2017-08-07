@@ -12,7 +12,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Message from Director&#039;s Desk - JMIT Radaur</title>
+<title>JMIT Library with best books Collection - JMIT Radaur</title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="http://jmit.ac.in/xmlrpc.php" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -25,18 +25,20 @@
 <script src="http://jmit.ac.in/wp-content/themes/jmit/js/bootstrap.min.js"></script>
 
 <!-- This site is optimized with the Yoast SEO plugin v3.1.2 - https://yoast.com/wordpress/plugins/seo/ -->
-<meta name="description" content="Message from Director of JMIT College, Radaur, Haryana"/>
+<meta name="description" content="JMIT has a very comprehensive library with best books collection within the library of JMIT"/>
 <meta name="robots" content="noodp"/>
-<link rel="canonical" href="http://jmit.ac.in/jmit-director-message/" />
+<link rel="canonical" href="http://jmit.ac.in/library-jmit/" />
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="article" />
-<meta property="og:title" content="Message from Director&#039;s Desk - JMIT Radaur" />
-<meta property="og:description" content="Message from Director of JMIT College, Radaur, Haryana" />
-<meta property="og:url" content="http://jmit.ac.in/jmit-director-message/" />
+<meta property="og:title" content="JMIT Library with best books Collection - JMIT Radaur" />
+<meta property="og:description" content="JMIT has a very comprehensive library with best books collection within the library of JMIT" />
+<meta property="og:url" content="http://jmit.ac.in/library-jmit/" />
 <meta property="og:site_name" content="JMIT" />
+<meta property="og:image" content="http://jmit.ac.in/wp-content/uploads/2016/09/libr-new.jpg" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:description" content="Message from Director of JMIT College, Radaur, Haryana" />
-<meta name="twitter:title" content="Message from Director&#039;s Desk - JMIT Radaur" />
+<meta name="twitter:description" content="JMIT has a very comprehensive library with best books collection within the library of JMIT" />
+<meta name="twitter:title" content="JMIT Library with best books Collection - JMIT Radaur" />
+<meta name="twitter:image" content="http://jmit.ac.in/wp-content/uploads/2016/09/libr-new.jpg" />
 <!-- / Yoast SEO plugin. -->
 
 <link rel="alternate" type="application/rss+xml" title="JMIT &raquo; Feed" href="http://jmit.ac.in/feed/" />
@@ -94,9 +96,9 @@ var wprmenu = {"zooming":"yes","from_width":"1280","swipe":"yes"};
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://jmit.ac.in/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://jmit.ac.in/wp-includes/wlwmanifest.xml" /> 
 
-<link rel='shortlink' href='http://jmit.ac.in/?p=181' />
-<link rel="alternate" type="application/json+oembed" href="http://jmit.ac.in/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fjmit.ac.in%2Fjmit-director-message%2F" />
-<link rel="alternate" type="text/xml+oembed" href="http://jmit.ac.in/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fjmit.ac.in%2Fjmit-director-message%2F&#038;format=xml" />
+<link rel='shortlink' href='http://jmit.ac.in/?p=202' />
+<link rel="alternate" type="application/json+oembed" href="http://jmit.ac.in/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fjmit.ac.in%2Flibrary-jmit%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://jmit.ac.in/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fjmit.ac.in%2Flibrary-jmit%2F&#038;format=xml" />
 <style>.mtphr-dnt-tick-contents:hover {-webkit-animation: animation 1s 16 ease;-webkit-animation-play-state: paused; animation: animation 1s 16 ease; animation-play-state: paused;}</style><link rel='https://github.com/WP-API/WP-API' href='http://jmit.ac.in/wp-json' />
 <script type="text/javascript">
 (function(url){
@@ -129,7 +131,7 @@ var wprmenu = {"zooming":"yes","from_width":"1280","swipe":"yes"};
 	for (var i = 0; i < evts.length; i++) {
 		addEvent(evts[i], logHuman);
 	}
-})('//jmit.ac.in/?wordfence_logHuman=1&hid=C297EF2E14FC1D8F79200C980BE3441D');
+})('//jmit.ac.in/?wordfence_logHuman=1&hid=4C0DB1579E7EE7E741A9A06E23158BB4');
 </script>		<style id="wprmenu_css" type="text/css" >
 			/* apply appearance settings */
 			#wprmenu_bar {
@@ -214,7 +216,7 @@ function DisplayChange()
 </script>
 </head>
 
-<body class="page page-id-181 page-template-default custom-font-enabled single-author">
+<body class="page page-id-202 page-template-default custom-font-enabled single-author">
 <header class="main-header">
 	<section class="top-header">
     	<div class="container">
@@ -255,9 +257,9 @@ function DisplayChange()
 <li id="menu-item-428" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-428"><a href="#">About Jmit</a>
 <ul class="sub-menu">
 	<li id="menu-item-255" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255"><a href="http://jmit.ac.in/profile/">Profile</a></li>
-	<li id="menu-item-1576" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-181 current_page_item menu-item-1576"><a href="http://jmit.ac.in/jmit-director-message/">Director’s Message</a></li>
+	<li id="menu-item-1576" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1576"><a href="http://jmit.ac.in/jmit-director-message/">Director’s Message</a></li>
 	<li id="menu-item-258" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-258"><a href="http://jmit.ac.in/hostel-accomodation-jmit/">Hostel Accomodations</a></li>
-	<li id="menu-item-259" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259"><a href="http://jmit.ac.in/library-jmit/">Library</a></li>
+	<li id="menu-item-259" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-202 current_page_item menu-item-259"><a href="http://jmit.ac.in/library-jmit/">Library</a></li>
 	<li id="menu-item-260" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><a href="http://jmit.ac.in/hi-speed-internet-labs/">Internet Labs</a></li>
 	<li id="menu-item-261" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a href="http://jmit.ac.in/best-auditorium-jmit-college/">JMIT Auditorium</a></li>
 	<li id="menu-item-1577" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1577"><a href="http://jmit.ac.in/social-responsibilities/">Social Responsibilities</a></li>
@@ -352,22 +354,210 @@ function DisplayChange()
             <div id="content" role="main" class="col-sm-9">
     
                                     
-	<article id="post-181" class="post-181 page type-page status-publish hentry">
+	<article id="post-202" class="post-202 page type-page status-publish hentry">
 		<header class="entry-header">
-												<h1 class="entry-title">Director’s Message</h1>
+												<h1 class="entry-title">Library</h1>
 		</header>
 
 		<div class="entry-content">
-			<p>Dear Students &amp; Worthy Parents</p>
-<p>“Be the Change”</p>
-<p>This is a nostalgic moment for me to reach out to you in sharing our tireless efforts in grooming future leaders, inspiring each student in shaping his/her tomorrow while taking you to the threshold of the new beginning of your professional career. I am overwhelmed to reach out to you as Director of Seth Jai Parkash Mukand Lal Institute of Engineering &amp; Technology (JMIT), Raduar, Haryana and welcome you to be in a professional environment, to aspire for a brighter tomorrow, for we aim to groom quality human resources for the Nation.</p>
-<p>As I see our students climbing up the career ladder on the path of success as each year passes by, I thank our team of faculty members for their tireless efforts in grooming each student and the Management Team with Dr. Ramesh Kumar ji, GS and other learned colleagues for their excellent support. We are blessed by the vision and valuable guidance of our Chairman, Sh. Ashok Kumar ji.</p>
-<p>Each day is a new day, opening new doors of opportunities and fresh avenues, only if we are able to see through our third eye and visualize, we can ‘be the change’, as each human is a storehouse of enthusiasm, efficacy and enlightenment in transforming the dreams into reality, in bringing the change, only if you have the conviction and confidence to say, “Yes I can”.</p>
-<p>With this conviction we March Ahead open new vistas for learning and empowering the youth with knowledge, innovation and better understanding.</p>
-<p>On this new dawn of ever expansive infinite domain of knowledge we are excited to <strong>welcome you</strong>!</p>
-<p>Come, Be a Mukandian and “Be the Change”!</p>
-<p>Director<br />
-S.K.Garg</p>
+			<div style="display: flex; text-align: justify;">
+<div style="width:33%">
+        <img width="250" height="188" alt="Library" src="http://jmit.ac.in/wp-content/uploads/2016/09/libr-new.jpg" title="Library">
+    </div>
+<div style="width:67%">
+    Library is the nerve centre of knowledge and is virtually the heart of an Academic Institution. To inform, inspire, disseminate and develop its users intellectually/technically the library maintains General Books, Text Books, Books for Competitive Examinations, Online Journals, National/ International Print Journals/ Magazines, News Papers, Educational Video Cassettes/ CDs and Maps etc.</p>
+<p>Fully Computerized, Fully Air-conditioned, Internet, DELNET, Inter Library Loan, Book Bank.</p>
+</div>
+</div>
+<div style="width: 100%; text-align: justify;">
+<p>The library operates Open Access System. The collection of books and other reading materials are being built at a fast rate. There are over 52565 books and about 3325 educational video cassettes &amp; CDs with viewing facilities in the library. All the library books are classified according to DDC 20th edition. The library subscribes to two online Journal packages, 100 National Print Journals and 16 News Papers. The Library is fully computerized. DELNET facilities connect the institute library with more than 4000 country wide libraries for availing of ILL (Inter Library Loan) and DDS (Document Delivery Services) facilities. The Library remains open from 9.25 AM to 8.00 PM. on all working days. Total no. of membership of Library is 3500.</p>
+</div>
+<p><a href="http://jmit.ac.in/wp-content/uploads/2016/02/listofjournals2014.xls">List of National Journals subscribed for the year 2014</a></p>
+<h4 style="text-align: center;" class="tab_head">E- JOURNALS:</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>EBSCOiBusiness Source Elite</strong></td>
+<td><strong>www.search.ebscohost.com</strong></td>
+</tr>
+<tr>
+<td>Elsevier: Science Direct (275 journals + back files 2000 onwards)</td>
+<td>www.sciencedirect.com</td>
+</tr>
+</tbody>
+</table>
+<p>Above E-Journals are multi user and can be accessed anywhere in the campus.</p>
+<h4 style="text-align: center;" class="tab_head">JMIT CENTRAL LIBRARY:</h4>
+<table>
+<tbody>
+<tr>
+<td>Total area of the library</td>
+<td>961 Sq.m.</td>
+</tr>
+<tr>
+<td>Seating Capacity of the Library</td>
+<td>250</td>
+</tr>
+<tr>
+<td>Working Hours of the Library</td>
+<td>09:25 am to 08:00 pm.</td>
+</tr>
+<tr>
+<td>Library Networking Facility</td>
+<td>Yes. All library computers are on LAN &amp; WAN.</td>
+</tr>
+<tr>
+<td>Print Magazines/Journals subscribed to</td>
+<td>100</td>
+</tr>
+<tr>
+<td>E-Journal Subscribed to</td>
+<td>IEEE (ASPP), Elsevier: Science Direct, Springer (ME &amp; EEC), J-Gate (JET &amp; MGT.), McGrawHill, ASTM Digital Library, Pro-Quest &amp; DELNET</td>
+</tr>
+<tr>
+<td>No. of News Papers subscribed to</td>
+<td>16</td>
+</tr>
+<tr>
+<td>Total No. of Books</td>
+<td>52565</td>
+</tr>
+<tr>
+<td>Total No. of CDs</td>
+<td>3325</td>
+</tr>
+<tr>
+<td>Departmental Libraries</td>
+<td>09</td>
+</tr>
+</tbody>
+</table>
+<h4 style="text-align: center;" class="tab_head">SUBJECT-WISE COLLECTION:</h4>
+<table>
+<tbody>
+<tr>
+<td class="tab_head">S.No.</td>
+<td class="tab_head">Courses</td>
+<td class="tab_head">No. of Titles</td>
+<td class="tab_head">No. of Volumes</td>
+<td colspan="2" class="tab_head">Journals</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td class="tab_head">National</td>
+<td class="tab_head">E-Journals</td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Computer Engineering</td>
+<td>1408</td>
+<td>6278</td>
+<td>12</td>
+<td width="205px" height="338" rowspan="13">
+                <strong>IEEE: <a href="#">ieeexplore.ieee.org</a></strong><br />
+                <strong>Springer (ME &amp; EEC):<br />
+                <a href="#">link.springer.com</a></strong><br />
+                <strong>McGrawHill:<br />
+                <a href="#">2.accessengineeringlibrary.com</a></strong><br />
+                <strong>Science Direct :<br />
+                <a href="#">www.sciencedirect.com</a></strong><br />
+                <strong>J-Gate (JET &amp; MGT.):<br />
+                <a href="#">jgateplus.com</a></strong><br />
+                <strong>ASTM Digital Library:<br />
+                <a href="#">compass.astm.org</a></strong><br />
+                <strong>Proquest Management:<br />
+                <a href="#">search.proquest.com</a></strong>
+            </td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Electronics &amp; Comm.. Engineering</td>
+<td>1451</td>
+<td>6281</td>
+<td>12</td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Mechanical Engineering</td>
+<td>1528</td>
+<td>5942</td>
+<td>12</td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Chemical Engineering</td>
+<td>1043</td>
+<td>4590</td>
+<td>06</td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Applied Electronics &amp; Instrumentation &amp; Engg.</td>
+<td>910</td>
+<td>3149</td>
+<td>&#8212;</td>
+</tr>
+<tr>
+<td>6.</td>
+<td width="354" height="19">Information Technology</td>
+<td>886</td>
+<td>3930</td>
+<td>06</td>
+</tr>
+<tr>
+<td>7.</td>
+<td>Electrical Engineering</td>
+<td>1192</td>
+<td>5420</td>
+<td>06</td>
+</tr>
+<tr>
+<td>8.</td>
+<td>MCA</td>
+<td>1019</td>
+<td>7590</td>
+<td>12</td>
+</tr>
+<tr>
+<td>9.</td>
+<td>M.Tech. (CSE)</td>
+<td>485</td>
+<td>1215</td>
+<td>05</td>
+</tr>
+<tr>
+<td>10.</td>
+<td>M.Tech (ECE)</td>
+<td>412</td>
+<td>1110</td>
+<td>05</td>
+</tr>
+<tr>
+<td>11.</td>
+<td>Applied Sciences &amp; Humanities</td>
+<td>597</td>
+<td>2010</td>
+<td>12</td>
+</tr>
+<tr>
+<td>12.</td>
+<td>MBA</td>
+<td>1106</td>
+<td>5050</td>
+<td>12</td>
+</tr>
+<tr>
+<td></td>
+<td>Total</td>
+<td>12037</td>
+<td>52565</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
 					</div><!-- .entry-content -->
 		<footer class="entry-meta">
 					</footer><!-- .entry-meta -->
@@ -563,9 +753,9 @@ var _wpcf7 = {"loaderUrl":"http:\/\/jmit.ac.in\/wp-content\/plugins\/contact-for
 <li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-428"><a href="#">About Jmit</a>
 <ul class="sub-menu">
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255"><a href="http://jmit.ac.in/profile/">Profile</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-181 current_page_item menu-item-1576"><a href="http://jmit.ac.in/jmit-director-message/">Director’s Message</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1576"><a href="http://jmit.ac.in/jmit-director-message/">Director’s Message</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-258"><a href="http://jmit.ac.in/hostel-accomodation-jmit/">Hostel Accomodations</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-259"><a href="http://jmit.ac.in/library-jmit/">Library</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-202 current_page_item menu-item-259"><a href="http://jmit.ac.in/library-jmit/">Library</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-260"><a href="http://jmit.ac.in/hi-speed-internet-labs/">Internet Labs</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-261"><a href="http://jmit.ac.in/best-auditorium-jmit-college/">JMIT Auditorium</a></li>
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1577"><a href="http://jmit.ac.in/social-responsibilities/">Social Responsibilities</a></li>
