@@ -59,7 +59,7 @@ int printAll(){
 	int noOfLinks=0;
 	ptr = head;
 	while(ptr!=NULL){
-		printf("link = %s \t seedLink = %s depth = %d\n",ptr->link,ptr->seedUrl,ptr->depth);
+		printf("link = %-100s  depth = %d    isVisited=%d\n",ptr->link,ptr->depth,ptr->isVisited);
 		noOfLinks++;
 		ptr=ptr->next;
 	}
@@ -383,18 +383,19 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS],char *seedUrl){
 
 
 /*##########################################################################################################################################*/
-char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCounter,char *seedUrl){
+char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl){
 	
+	static int fileCounter=0;
 	printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
-
+	
 	char *fileName;
 	
 	char *space = " ";
 	
 	
 	fileName = (char *)malloc(sizeof(char)*130);
-	sprintf(fileName,"%s/temp%d.txt",dir,depth);
+	sprintf(fileName,"%s/temp.txt",dir);
 	
 	
 	sprintf(command,"wget -O ");
@@ -406,23 +407,22 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCount
 	strcat(command,url);
 	system(command);
 	
-	if(!isSeed){
-	/*char *file;
-	file = malloc(sizeof(char)*(strlen(ch)+strlen(dir)+10));
-    
-	sprintf(file,"%s",dir);
-	strcat(file,fileName);
-	*/
+	
 	FILE *fp;
 	fp = fopen(fileName,"r");
-		
+	if(isSeed)
+		sprintf(fileName,"%s/index%d-%d.html",dir,(++fileCounter)*100,depth);
+	
+	else
+		sprintf(fileName,"%s/index%d_%d.html",dir,(++fileCounter),depth);
+	
 	
 	char *appendThisString = (char *)malloc(sizeof(char)*300);
 	sprintf(appendThisString,"<!--URL - %s ## Depth - %d ## SeedUrl - %s-->\n\n",url,depth,seedUrl);
 	if(fp){
 		
 		FILE *newFile;
-		sprintf(fileName,"%s/index%d_%d.html",dir,fileCounter,depth);
+	//	sprintf(fileName,"%s/index%d_%d.html",dir,fileCounter,depth);
 		newFile = fopen(fileName,"w");
 		
 		char ch;
@@ -443,12 +443,11 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,int fileCount
 		
 	}
 	
-	}
-
+	
 	free(command);
 
 	
-	printf("############ FILE DOWNLOADED	####################\n");
+	printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
 	
 	return fileName;
 
@@ -459,12 +458,13 @@ void downloadFilesFromList(char *dir){
 	LINKS *temp2;
 
 	char *fname;
-	int counter=0;
 	while(temp!=NULL){
-		
-		fname = downloadTheHtmlFile(temp->link,dir,temp->depth,0,++counter,temp->seedUrl);
+		if(!temp->isVisited){
+		    fname = downloadTheHtmlFile(temp->link,dir,temp->depth,0,temp->seedUrl);
+			free(fname);
+		}
 		temp=temp->next;
-		free(fname);
+		
 		
 	}
 	temp=head;
@@ -485,14 +485,14 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 		return;
 		
 	}
-	printf("#########################CRAWLING START for url %s##############################\n",url);
+	printf("#########################CRAWLING START for %s with depth %d##############################\n",url,depth);
 	char *ch;
 	char *file;
 	char *html;
 	int success=0;
 	
 	// 1 is for seed url and 0 is  a neccessary evil
-	file=downloadTheHtmlFile(url,dir,depth,1,0,url);
+	file=downloadTheHtmlFile(url,dir,depth,1,url);
 
 	
 
@@ -521,19 +521,29 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
         printf("no links were found");
     }
 
-	/*
+	
 	LINKS *temp;
 	temp = head;
 	
+	
 	while(temp!=NULL){
-		if(temp->isVisited==0)
+	printf("\n#### %-80s depth %d isVisited %d\n",temp->link,temp->depth,temp->isVisited);
+		temp=temp->next;
+	}
+	temp=head;
+	while(temp!=NULL){
+		if(temp->isVisited==0){
+			if((temp->depth)-1>=1 && temp->depth==depth){
+				temp->isVisited=1;
+			
 			crawlItBaby(seedUrl,temp->link,dir,depth-1);
+			printf("\n\ncrawled for %s depth %d\n\n",temp->link,depth);
+			}
+		}
 		temp=temp->next;
 	
-	}*/
-	for(int i=0;i<success;i++){
-		crawlItBaby(seedUrl,linksArr[i],dir,depth-1);
 	}
+	
 	
 
 	
