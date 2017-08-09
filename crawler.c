@@ -261,7 +261,8 @@ int isLinkValid(char *ch){
     int i=0;
     while(ch[i]!=null){
 
-         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) ){
+         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || 
+				ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n")){
 
             return 0;
          }
@@ -492,7 +493,7 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 	int success=0;
 	
 	// 1 is for seed url and 0 is  a neccessary evil
-	file=downloadTheHtmlFile(url,dir,depth,1,url);
+	file=downloadTheHtmlFile(url,dir,depth,1,seedUrl);
 
 	
 
@@ -503,11 +504,7 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 
 	
     success = extractTheLinks(html,linksArr,seedUrl);
-	printf("\n\n");
-	for(int i=0;i<success;i++){ 
-		printf("%s\n",linksArr[i]);
-	}
-	
+
 	for(int i=0;i<success;i++){
 		//if(isUniqueInList(linksArr[i]))
 			insertInList(linksArr[i],url,depth);
@@ -526,18 +523,14 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth){
 	temp = head;
 	
 	
-	while(temp!=NULL){
-	printf("\n#### %-80s depth %d isVisited %d\n",temp->link,temp->depth,temp->isVisited);
-		temp=temp->next;
-	}
-	temp=head;
+	
 	while(temp!=NULL){
 		if(temp->isVisited==0){
 			if((temp->depth)-1>=1 && temp->depth==depth){
 				temp->isVisited=1;
 			
 			crawlItBaby(seedUrl,temp->link,dir,depth-1);
-			printf("\n\ncrawled for %s depth %d\n\n",temp->link,depth);
+			
 			}
 		}
 		temp=temp->next;
