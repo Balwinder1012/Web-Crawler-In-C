@@ -24,23 +24,16 @@ typedef struct node{
 
 }LINKS;
 
-LINKS *head=NULL;
 
-void insertIntoHash(LINKS *HashTable[100],int index){
 
-	index %= 100;
-	if(HashTable[index]!=NULL){
-	
-		LINKS *temp;
-		temp=HashTable[index];
-		while(temp->)
-	
-	
-	}
-	
+int getHashCode(int n){
+
+	return (n)%100;
 
 }
-void insertInList(char *link,char *seedUrl,int depth,LINKS *HashTable[100]){
+
+
+LINKS *getNode(char *link,char *seedUrl,int depth,LINKS *HashTable[100]){
 
 	LINKS *node = (LINKS *)malloc(sizeof(LINKS));
 	LINKS *temp;
@@ -49,35 +42,56 @@ void insertInList(char *link,char *seedUrl,int depth,LINKS *HashTable[100]){
 	node->depth = depth;
 	node->isVisited = 0;
 	node->next = NULL;
-	if(head==NULL){
-		head = node;
 		
-		node->prev = NULL;
+	//node->prev = NULL;
 	
-	}
-	else{
-		temp = head;
-		
-		while(temp->next!=NULL)
-			temp = temp->next;
-		
-		
-		temp->next = node;
-		node->prev = temp;
-
-	}
-	int index=strlen(link)%100;
-	while(HashTable[index]!=NULL){
-		index++;
-	}
 	
-	insertIntoHash(HashTable,strlen(link));
 	
+	return node;
 	
 
 
 }
 
+void insertIntoHash(char *link,char *seedUrl,int depth,LINKS *HashTable[100]){
+
+	LINKS *node = getNode(link,seedUrl,depth,HashTable);
+	int index = getHashCode(strlen(link));
+	
+	if(HashTable[index]==NULL){
+		HashTable[index] = node;
+		return;
+	}
+	
+	LINKS *ptr = HashTable[index];
+	
+	while(ptr->next!=NULL)
+		ptr = ptr->next;
+	
+	ptr->next = node;
+	
+	
+	
+
+}
+
+int isUnique(LINKS *HashTable[100],char *link){
+
+
+	int index = getHashCode(strlen(link));
+	
+	LINKS *temp = HashTable[index];
+	while(temp!=NULL){
+		if(!strcmp(link,temp->link))
+			return 0;
+	
+		temp=temp->next;
+	}
+	return 1;
+
+
+}
+/*
 
 int printAll(){
 	
@@ -92,46 +106,50 @@ int printAll(){
 
 	return noOfLinks;
 	
-}
+}*/
 int main(){
 
 	char *link;
 	char *seedUrl;
 	int depth;
 	
-	bhgy
+	
+	LINKS *HashTable[100];
 	
 	for(int i=0;i<100;i++)
 		HashTable[i]=NULL;
 	
+	link="jmit.ac.in";
  	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,HashTable);
+	insertIntoHash(link,seedUrl,depth,HashTable);
 	
 	
 	link="mmu";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,HashTable);
+	insertIntoHash(link,seedUrl,depth,HashTable);
 	
 	
 	
 	link="nit";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,HashTable);
+	insertIntoHash(link,seedUrl,depth,HashTable);
 	
 	
 	
 	link="kitm";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,HashTable);
+	insertIntoHash(link,seedUrl,depth,HashTable);
 	
-	printf("\n%d\n",printAll());
 	
-	link = "jmit.ac.in";
-	printf("\n\n%s\n\n",HashTable[strlen(link)%100]->link);
+	
+	link = "nit";
+	printf("\n\n%s\n\n",HashTable[getHashCode(strlen(link))]->link);
+	
+	printf("%d" ,isUnique(HashTable,"jmit.ac.i"));
 	
 	
 	
