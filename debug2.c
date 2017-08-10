@@ -9,8 +9,7 @@
 #define MAX_LINKS 1000
 #define MAX_LINK_SIZE 100
 #define MAX_LINKS_ALLOWED 5
-
-
+#define MAX_HASH_SIZE 100
 
 typedef struct node{
 
@@ -21,9 +20,11 @@ typedef struct node{
 	struct node *next;
 	struct node *prev;
 
+
 }LINKS;
 
 
+LINKS *head=NULL;
 typedef struct hashNode{
 	
 	LINKS *head;
@@ -34,40 +35,25 @@ typedef struct hashNode{
 
 int getHashCode(int n){
 
-	return (n)%100;
+	return (n)%MAX_HASH_SIZE;
 
 }
 
-void insertAtBeg(LINKS ***head,LINKS *node){
 
-	node->next = **head;
-	node->prev = NULL;
-	**head = node;
-}
+void insertItAfter(LINKS *first,LINKS *node,int total){
 
-void insertItAfter(LINKS *node,LINKS *head,int total){
-
-	LINKS *NextNode;
-	LINKS *prev = NULL;
-	NextNode = head;
-	printf("\nv## alue of t is %d\n",total);
-	for(int i=0;i<total;i++){
-		prev = NextNode;
-		NextNode = NextNode->next;
-	}
+	LINKS *second = first;
+	for(int i=0;i<total;i++)
+		second = second->next;
 	
-	
-	node->prev = prev;
-	node->next = NextNode;
-	prev->next = node;
-	if(NextNode!=NULL)
-	NextNode->prev = node;
-	
-		
-
+	node->prev = first;
+	node->next = second;
+	first->next = node;
+	if(second!=NULL)
+	second->prev = node;
 
 }
-void insertInList(char *link,char *seedUrl,int depth,LINKS **head,HashTable ht[100]){
+void insertInList(char *link,char *seedUrl,int depth,HashTable ht[]){
 
 	LINKS *node = (LINKS *)malloc(sizeof(LINKS));
 	LINKS *temp;
@@ -77,126 +63,93 @@ void insertInList(char *link,char *seedUrl,int depth,LINKS **head,HashTable ht[1
 	node->isVisited = 0;
 	node->next = NULL;
 	
-	int index  = getHashCode(strlen(link));
+	int index = getHashCode(strlen(link));
 	if(!ht[index].total){
+		ht[index].total += 1;
 		ht[index].head=node;
-		ht[index].total +=1;
-		insertAtBeg(&head,node);
-		//printf("%s",(*head)->link);
+		node->next = head;
+		node->prev=NULL;
+		if(head!=NULL)
+			head->prev=node;
+		head=node;
 		return;
+	
+	
 	}
 	
-	while(ht[index].total==0)
-		index++;
-	
-	index = getHashCode(index);
-	
-//	ht[index].total += 1;
-	
-	insertItAfter(node,ht[index].head,ht[index].total);
-	
-	ht[index].total +=1;
 	
 	
 	
-	
-	
-	
+	LINKS *ptr;
+	ptr = ht[index].head;
+	printf("\nnode %s existes\n",ptr->link);
+	insertItAfter(ptr,node,ht[index].total);
+	ht[index].total += 1;
+
 
 }
 
-
-
-
-/*
-
-int printAll(){
+int isUniqueInList(int key,char *url,HashTable ht[]){
 	
-	LINKS *ptr;
-	int noOfLinks=0;
-	ptr = head;
-	while(ptr!=NULL){
-		printf("link = %-50s  depth = %d    isVisited=%d\n",ptr->link,ptr->depth,ptr->isVisited);
-		noOfLinks++;
-		ptr=ptr->next;
-	}
-
-	return noOfLinks;
-	
-}*/
-int isUnique(char *url,HashTable ht[100]){
-	
-	int index = getHashCode(strlen(url));
+	int index = getHashCode(key);
+	int total = ht[index].total;
 	LINKS *ptr = ht[index].head;
-	int t = ht[index].total;
-	
-	printf("\nvalue of t is %d\n",t);
-	for(int i=0;i<t;i++){
-		printf("\n## %s %s ##\n",ptr->link,url);
+	for(int i=0;i<total;i++){
+		printf("\n##%s # %s#\n",url,ptr->link);
 		if(!strcmp(ptr->link,url))
 			return 0;
-		ptr=ptr->next;
+		ptr = ptr->next;
+	
 	}
 	return 1;
 
+
 }
+
 int main(){
 
-	LINKS *head;
+	char *link;
 	char *seedUrl;
 	int depth;
 	
-	head=NULL;
+	
 	HashTable ht[100];
 	
 	
 	for(int i=0;i<100;i++)
 		ht[i].total=0;
-
 	
-
-	 char *link = (char *)malloc(sizeof(char)*50);
+	link="jmit.ac.in";
+ 	seedUrl="abc";
+	depth=2;
+	insertInList(link,seedUrl,depth,ht);
 	
-	sprintf(link,"kitm");
+	
+	link="mmu";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,&head,ht);	
+	insertInList(link,seedUrl,depth,ht);
 	
 	
 	
-	link = (char *)malloc(sizeof(char)*50);
-	
-	sprintf(link,"jmit");
+	link="nit";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,&head,ht);	
+	insertInList(link,seedUrl,depth,ht);
 	
 	
-	link = (char *)malloc(sizeof(char)*50);
 	
-	sprintf(link,"kkr");
+	link="kitm";
 	seedUrl="abc";
 	depth=2;
-	insertInList(link,seedUrl,depth,&head,ht);	
-	
-	link = (char *)malloc(sizeof(char)*50);
-	
-	sprintf(link,"nir");
-	seedUrl="abc";
-	depth=2;
-	insertInList(link,seedUrl,depth,&head,ht);	
+	insertInList(link,seedUrl,depth,ht);
 	
 	
-	
-	printf("\n\n");
-	for(LINKS *temp=head;temp!=NULL;temp=temp->next)
-printf("%s ",temp->link);
-
-	
-	link = "kitm";
-	printf("\n\n%d\n\n",isUnique(link,ht));
-	
-
+	for(LINKS *ptr=head;ptr!=NULL;ptr=ptr->next)
+		printf("\n%s\n",ptr->link);
+	//printf("\n\n%s\n\n",ht[getHashCode(strlen(link))]->link);
+	link="jmit.ac.in";
+	printf("\n%d\n" ,isUniqueInList(strlen(link),link,ht));
 	
 	
 	

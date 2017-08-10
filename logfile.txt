@@ -1,199 +1,126 @@
-==3076== Memcheck, a memory error detector
-==3076== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
-==3076== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
-==3076== Command: ./crawler jmit.ac.in theDir 3
-==3076== Parent PID: 2856
-==3076== 
---3076-- 
---3076-- Valgrind options:
---3076--    --tool=memcheck
---3076--    --leak-check=full
---3076--    --show-leak-kinds=all
---3076--    --log-file=logfile.txt
---3076--    -v
---3076-- Contents of /proc/version:
---3076--   Linux version 4.4.0-89-generic (buildd@lgw01-18) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) ) #112-Ubuntu SMP Mon Jul 31 19:38:41 UTC 2017
---3076-- 
---3076-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-avx
---3076-- Page sizes: currently 4096, max supported 4096
---3076-- Valgrind library directory: /usr/lib/valgrind
---3076-- Reading syms from /home/balwinder1012/WEBCRAWLER/webCrawlerInC/crawler
---3076-- Reading syms from /lib/x86_64-linux-gnu/ld-2.23.so
---3076--   Considering /lib/x86_64-linux-gnu/ld-2.23.so ..
---3076--   .. CRC mismatch (computed 9bc477cd wanted 3da2f12a)
---3076--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.23.so ..
---3076--   .. CRC is valid
---3076-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
---3076--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
---3076--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
---3076--    object doesn't have a symbol table
---3076--    object doesn't have a dynamic symbol table
---3076-- Scheduler: using generic scheduler lock implementation.
---3076-- Reading suppressions file: /usr/lib/valgrind/default.supp
-==3076== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-3076-by-balwinder1012-on-???
-==3076== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-3076-by-balwinder1012-on-???
-==3076== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-3076-by-balwinder1012-on-???
-==3076== 
-==3076== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==3076== don't want to do, unless you know exactly what you're doing,
-==3076== or are doing some strange experiment):
-==3076==   /usr/lib/valgrind/../../bin/vgdb --pid=3076 ...command...
-==3076== 
-==3076== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==3076==   /path/to/gdb ./crawler
-==3076== and then give GDB the following command
-==3076==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=3076
-==3076== --pid is optional if only one valgrind process is running
-==3076== 
---3076-- REDIR: 0x401cf90 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
---3076-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
---3076--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
---3076--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
---3076--    object doesn't have a symbol table
---3076-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
---3076--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
---3076--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
---3076--    object doesn't have a symbol table
-==3076== WARNING: new redirection conflicts with existing -- ignoring it
---3076--     old: 0x0401cf90 (strlen              ) R-> (0000.0) 0x3809e181 ???
---3076--     new: 0x0401cf90 (strlen              ) R-> (2007.0) 0x04c31020 strlen
---3076-- REDIR: 0x401b8e0 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
---3076-- REDIR: 0x401bb00 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
---3076-- REDIR: 0x401dcf0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
---3076-- Reading syms from /lib/x86_64-linux-gnu/libc-2.23.so
---3076--   Considering /lib/x86_64-linux-gnu/libc-2.23.so ..
---3076--   .. CRC mismatch (computed b2979fac wanted 1affc958)
---3076--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so ..
---3076--   .. CRC is valid
---3076-- REDIR: 0x4ec9a00 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ec5280 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ecbcf0 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ec76f0 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ec7a80 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ec914b (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ec7400 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
---3076-- REDIR: 0x4ebe130 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
---3076-- REDIR: 0x4ec5160 (libc.so.6:strcpy) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4edf9d0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c31040 (strcpy)
---3076-- REDIR: 0x4ec3880 (libc.so.6:strcat) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ee27f0 (libc.so.6:__strcat_sse2_unaligned) redirected to 0x4c30c00 (strcat)
---3076-- REDIR: 0x4ebe4f0 (libc.so.6:free) redirected to 0x4c2ed80 (free)
---3076-- REDIR: 0x4ec5720 (libc.so.6:strlen) redirected to 0x4c30f60 (strlen)
---3076-- REDIR: 0x4ed0760 (libc.so.6:strchrnul) redirected to 0x4c34da0 (strchrnul)
---3076-- REDIR: 0x4ec93b0 (libc.so.6:__GI_mempcpy) redirected to 0x4c34fa0 (__GI_mempcpy)
---3076-- REDIR: 0x4ec8060 (libc.so.6:__GI_strstr) redirected to 0x4c354d0 (__strstr_sse2)
---3076-- REDIR: 0x4ece470 (libc.so.6:__GI_memcpy) redirected to 0x4c32b00 (__GI_memcpy)
-==3076== Invalid read of size 1
-==3076==    at 0x401A07: extractTheLinks (crawler.c:381)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076==  Address 0x525df54 is 0 bytes after a block of size 52,724 alloc'd
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401087: readTheFile (crawler.c:186)
-==3076==    by 0x401D0E: crawlItBaby (crawler.c:535)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
---3076-- REDIR: 0x4ec3cd0 (libc.so.6:strcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
---3076-- REDIR: 0x4ed9570 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c31f90 (strcmp)
-==3076== Invalid read of size 1
-==3076==    at 0x401A07: extractTheLinks (crawler.c:381)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076==  Address 0x53977c0 is 0 bytes after a block of size 96 alloc'd
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401087: readTheFile (crawler.c:186)
-==3076==    by 0x401D0E: crawlItBaby (crawler.c:535)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== 
-==3076== Process terminating with default action of signal 2 (SIGINT)
-==3076==    at 0x4F31290: __write_nocancel (syscall-template.S:84)
-==3076==    by 0x4EB2BFE: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1263)
-==3076==    by 0x4EB4408: new_do_write (fileops.c:518)
-==3076==    by 0x4EB4408: _IO_do_write@@GLIBC_2.2.5 (fileops.c:494)
-==3076==    by 0x4EB347C: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1331)
-==3076==    by 0x4E8792C: vfprintf (vfprintf.c:1663)
-==3076==    by 0x4E8F898: printf (printf.c:33)
-==3076==    by 0x400D80: printAll (crawler.c:94)
-==3076==    by 0x401F38: main (crawler.c:604)
-==3076== 
-==3076== HEAP SUMMARY:
-==3076==     in use at exit: 2,560 bytes in 40 blocks
-==3076==   total heap usage: 2,151 allocs, 2,111 frees, 1,529,168 bytes allocated
-==3076== 
-==3076== Searching for pointers to 40 not-freed blocks
-==3076== Checked 67,920 bytes
-==3076== 
-==3076== 240 bytes in 5 blocks are still reachable in loss record 1 of 4
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x400BE0: insertInList (crawler.c:57)
-==3076==    by 0x401D66: crawlItBaby (crawler.c:545)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== 400 bytes in 5 blocks are still reachable in loss record 2 of 4
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401300: getTheLink (crawler.c:262)
-==3076==    by 0x40194A: extractTheLinks (crawler.c:389)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== 720 bytes in 15 blocks are still reachable in loss record 3 of 4
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x400BE0: insertInList (crawler.c:57)
-==3076==    by 0x401D66: crawlItBaby (crawler.c:545)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== 1,200 bytes in 15 blocks are still reachable in loss record 4 of 4
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401300: getTheLink (crawler.c:262)
-==3076==    by 0x40194A: extractTheLinks (crawler.c:389)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== LEAK SUMMARY:
-==3076==    definitely lost: 0 bytes in 0 blocks
-==3076==    indirectly lost: 0 bytes in 0 blocks
-==3076==      possibly lost: 0 bytes in 0 blocks
-==3076==    still reachable: 2,560 bytes in 40 blocks
-==3076==         suppressed: 0 bytes in 0 blocks
-==3076== 
-==3076== ERROR SUMMARY: 17 errors from 2 contexts (suppressed: 0 from 0)
-==3076== 
-==3076== 2 errors in context 1 of 2:
-==3076== Invalid read of size 1
-==3076==    at 0x401A07: extractTheLinks (crawler.c:381)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076==  Address 0x53977c0 is 0 bytes after a block of size 96 alloc'd
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401087: readTheFile (crawler.c:186)
-==3076==    by 0x401D0E: crawlItBaby (crawler.c:535)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== 
-==3076== 15 errors in context 2 of 2:
-==3076== Invalid read of size 1
-==3076==    at 0x401A07: extractTheLinks (crawler.c:381)
-==3076==    by 0x401D36: crawlItBaby (crawler.c:541)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076==  Address 0x525df54 is 0 bytes after a block of size 52,724 alloc'd
-==3076==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==3076==    by 0x401087: readTheFile (crawler.c:186)
-==3076==    by 0x401D0E: crawlItBaby (crawler.c:535)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401DD9: crawlItBaby (crawler.c:562)
-==3076==    by 0x401F29: main (crawler.c:603)
-==3076== 
-==3076== ERROR SUMMARY: 17 errors from 2 contexts (suppressed: 0 from 0)
+==4315== Memcheck, a memory error detector
+==4315== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==4315== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==4315== Command: ./crawler jmit.ac.in theDir 3
+==4315== Parent PID: 2856
+==4315== 
+--4315-- 
+--4315-- Valgrind options:
+--4315--    --tool=memcheck
+--4315--    --leak-check=full
+--4315--    --show-leak-kinds=all
+--4315--    --log-file=logfile.txt
+--4315--    -v
+--4315-- Contents of /proc/version:
+--4315--   Linux version 4.4.0-89-generic (buildd@lgw01-18) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4) ) #112-Ubuntu SMP Mon Jul 31 19:38:41 UTC 2017
+--4315-- 
+--4315-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-rdtscp-sse3-avx
+--4315-- Page sizes: currently 4096, max supported 4096
+--4315-- Valgrind library directory: /usr/lib/valgrind
+--4315-- Reading syms from /home/balwinder1012/WEBCRAWLER/webCrawlerInC/crawler
+--4315-- Reading syms from /lib/x86_64-linux-gnu/ld-2.23.so
+--4315--   Considering /lib/x86_64-linux-gnu/ld-2.23.so ..
+--4315--   .. CRC mismatch (computed 9bc477cd wanted 3da2f12a)
+--4315--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.23.so ..
+--4315--   .. CRC is valid
+--4315-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--4315--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--4315--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
+--4315--    object doesn't have a symbol table
+--4315--    object doesn't have a dynamic symbol table
+--4315-- Scheduler: using generic scheduler lock implementation.
+--4315-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==4315== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-4315-by-balwinder1012-on-???
+==4315== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-4315-by-balwinder1012-on-???
+==4315== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-4315-by-balwinder1012-on-???
+==4315== 
+==4315== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==4315== don't want to do, unless you know exactly what you're doing,
+==4315== or are doing some strange experiment):
+==4315==   /usr/lib/valgrind/../../bin/vgdb --pid=4315 ...command...
+==4315== 
+==4315== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==4315==   /path/to/gdb ./crawler
+==4315== and then give GDB the following command
+==4315==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=4315
+==4315== --pid is optional if only one valgrind process is running
+==4315== 
+--4315-- REDIR: 0x401cf90 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
+--4315-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--4315--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--4315--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
+--4315--    object doesn't have a symbol table
+--4315-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--4315--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--4315--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
+--4315--    object doesn't have a symbol table
+==4315== WARNING: new redirection conflicts with existing -- ignoring it
+--4315--     old: 0x0401cf90 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--4315--     new: 0x0401cf90 (strlen              ) R-> (2007.0) 0x04c31020 strlen
+--4315-- REDIR: 0x401b8e0 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
+--4315-- REDIR: 0x401bb00 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
+--4315-- REDIR: 0x401dcf0 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
+--4315-- Reading syms from /lib/x86_64-linux-gnu/libc-2.23.so
+--4315--   Considering /lib/x86_64-linux-gnu/libc-2.23.so ..
+--4315--   .. CRC mismatch (computed b2979fac wanted 1affc958)
+--4315--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so ..
+--4315--   .. CRC is valid
+--4315-- REDIR: 0x4ec9a00 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ec5280 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ecbcf0 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ec76f0 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ec7a80 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ec914b (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ec7400 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
+--4315-- REDIR: 0x4ebe130 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
+--4315-- REDIR: 0x4ec5160 (libc.so.6:strcpy) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4edf9d0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c31040 (strcpy)
+--4315-- REDIR: 0x4ec3880 (libc.so.6:strcat) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ee27f0 (libc.so.6:__strcat_sse2_unaligned) redirected to 0x4c30c00 (strcat)
+--4315-- REDIR: 0x4ebe4f0 (libc.so.6:free) redirected to 0x4c2ed80 (free)
+--4315-- REDIR: 0x4ec5720 (libc.so.6:strlen) redirected to 0x4c30f60 (strlen)
+--4315-- REDIR: 0x4ed0760 (libc.so.6:strchrnul) redirected to 0x4c34da0 (strchrnul)
+--4315-- REDIR: 0x4ec93b0 (libc.so.6:__GI_mempcpy) redirected to 0x4c34fa0 (__GI_mempcpy)
+--4315-- REDIR: 0x4ec8060 (libc.so.6:__GI_strstr) redirected to 0x4c354d0 (__strstr_sse2)
+--4315-- REDIR: 0x4ece470 (libc.so.6:__GI_memcpy) redirected to 0x4c32b00 (__GI_memcpy)
+--4315-- REDIR: 0x4ec3cd0 (libc.so.6:strcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--4315-- REDIR: 0x4ed9570 (libc.so.6:__strcmp_sse2_unaligned) redirected to 0x4c31f90 (strcmp)
+==4315== Invalid read of size 1
+==4315==    at 0x401A2F: extractTheLinks (crawler.c:386)
+==4315==    by 0x401D1E: crawlItBaby (crawler.c:543)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401F98: main (crawler.c:620)
+==4315==  Address 0x525dc08 is 0 bytes after a block of size 52,472 alloc'd
+==4315==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4315==    by 0x4010B2: readTheFile (crawler.c:191)
+==4315==    by 0x401CF6: crawlItBaby (crawler.c:537)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401F98: main (crawler.c:620)
+==4315== 
+==4315== 
+==4315== HEAP SUMMARY:
+==4315==     in use at exit: 0 bytes in 0 blocks
+==4315==   total heap usage: 1,498 allocs, 1,498 frees, 1,147,160 bytes allocated
+==4315== 
+==4315== All heap blocks were freed -- no leaks are possible
+==4315== 
+==4315== ERROR SUMMARY: 9 errors from 1 contexts (suppressed: 0 from 0)
+==4315== 
+==4315== 9 errors in context 1 of 1:
+==4315== Invalid read of size 1
+==4315==    at 0x401A2F: extractTheLinks (crawler.c:386)
+==4315==    by 0x401D1E: crawlItBaby (crawler.c:543)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401F98: main (crawler.c:620)
+==4315==  Address 0x525dc08 is 0 bytes after a block of size 52,472 alloc'd
+==4315==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4315==    by 0x4010B2: readTheFile (crawler.c:191)
+==4315==    by 0x401CF6: crawlItBaby (crawler.c:537)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401E48: crawlItBaby (crawler.c:579)
+==4315==    by 0x401F98: main (crawler.c:620)
+==4315== 
+==4315== ERROR SUMMARY: 9 errors from 1 contexts (suppressed: 0 from 0)
