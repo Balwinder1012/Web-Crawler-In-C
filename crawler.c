@@ -6,10 +6,9 @@
 #include <sys/stat.h>
 #define null '\0'
 #define MAX_DEPTH '3' 
-#define MAX_LINKS 1000
-#define MAX_LINK_SIZE 200
+#define MAX_LINK_SIZE 80
 #define MAX_LINKS_ALLOWED 5
-#define MAX_SIZE_FOR_HASH 100
+#define MAX_HASH_SIZE 100
 
 typedef struct node{
 
@@ -23,6 +22,8 @@ typedef struct node{
 
 }LINKS;
 
+
+
 typedef struct hashNode{
 	
 	LINKS *head;
@@ -33,57 +34,25 @@ typedef struct hashNode{
 
 int getHashCode(int n){
 
-	return (n)%MAX_SIZE_FOR_HASH;
+	return (n)%MAX_HASH_SIZE;
 
 }
 
-void insertAtBeg(LINKS ****head,LINKS *node){
 
-	node->next = ***head;
-	node->prev = NULL;
-	***head = node;
-}
+void insertItAfter(LINKS *first,LINKS *node,int total){
 
-void insertItAfter(LINKS *node,LINKS *head,int total){
-
-	LINKS *NextNode;
-	LINKS *prev = NULL;
-	NextNode = head;
-	//printf("\nv## alue of t is %d\n",total);
-	for(int i=0;i<total;i++){
-		prev = NextNode;
-		NextNode = NextNode->next;
-	}
+	LINKS *second = first;
+	for(int i=0;i<total-1;i++)
+		second = second->next;
 	
-	
-	node->prev = prev;
-	node->next = NextNode;
-	prev->next = node;
-	if(NextNode!=NULL)
-	NextNode->prev = node;
-	
-		
+	node->prev = first;
+	node->next = second;
+	first->next = node;
+	second->prev = node;
 
 
 }
-
-int isUnique(char *url,HashTable ht[MAX_SIZE_FOR_HASH]){
-	
-	int index = getHashCode(strlen(url));
-	LINKS *ptr = ht[index].head;
-	int t = ht[index].total;
-	
-	//printf("\nvalue of t is %d\n",t);
-	for(int i=0;i<t;i++){
-	//	printf("\n## %s %s ##\n",ptr->link,url);
-		if(!strcmp(ptr->link,url))
-			return 0;
-		ptr=ptr->next;
-	}
-	return 1;
-
-}
-void insertInList(char *link,char *seedUrl,int depth,LINKS ***head,HashTable ht[MAX_SIZE_FOR_HASH]){
+void insertInList(char *link,char *seedUrl,int depth,LINKS ***head,HashTable ht[]){
 
 	LINKS *node = (LINKS *)malloc(sizeof(LINKS));
 	LINKS *temp;
@@ -93,35 +62,30 @@ void insertInList(char *link,char *seedUrl,int depth,LINKS ***head,HashTable ht[
 	node->isVisited = 0;
 	node->next = NULL;
 	
-	int index  = getHashCode(strlen(link));
+	int index = getHashCode(strlen(link));
 	if(!ht[index].total){
+		ht[index].total += 1;
 		ht[index].head=node;
-		ht[index].total +=1;
-		insertAtBeg(&head,node);
-		printf("\nlink %-60s isVisited %d \n",node->link,node->isVisited);
-		//printf("%s",(*head)->link);
+		node->next = **head;
+		node->prev=NULL;
+		**head->prev=node;
+		**head=node;
 		return;
+	
+	
 	}
 	
+	
+	
+	
+	LINKS *ptr;
+	ptr = ht[index].head;
+	
+	insertItAfter(ptr,node,ht[index].total);
+	ht[index].total += 1;
 
-	
-	
-	
-//	ht[index].total += 1;
-	
-	insertItAfter(node,ht[index].head,ht[index].total);
-	
-	ht[index].total +=1;
-	
-	
-	
-	printf("\nlink %-60s isVisited %d \n",node->link,node->isVisited);
-	
-	
 
 }
-
-
 int printAll(LINKS **head){
 	
 	LINKS *ptr;
@@ -329,9 +293,8 @@ int isLinkValid(char *ch){
     int i=0;
     while(ch[i]!=null){
 
-         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || 
-				ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n") || (ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='g' && ch[i+3]==null) ||
-		   		(ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='e' && ch[i+3]=='g' && ch[i+4]==null)|| (ch[i]=='p' && ch[i+1]=='n' && ch[i+2]=='g' && ch[i+3]==null)){
+         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || (
+				ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n"))){
 
             return 0;
          }
@@ -358,9 +321,35 @@ int closingAnchorTagPresent(char *ch,int i){
 
 
 }
+/*
+int isUnique(char *links[MAX_LINKS_ALLOWED],int linkCounter,char *word){
 
 
+    for(int i=0;i<linkCounter;i++)
+	if(!strcmp(links[i],word))
+		return 0;
+	
+    return 1;
 
+    
+
+}*/
+int isUniqueInList(int key,char *url,HashTable ht[]){
+	
+	int index = getHashCode(key);
+	int total = ht[index].total;
+	LINKS *ptr = ht[index].head;
+	for(int i=0;i<total-1;i++){
+		
+		if(!strcmp(ptr->link,url))
+			return 0;
+		ptr = ptr->next;
+	
+	}
+	return 1;
+
+
+}
 
 int isBaseCorrect(char *word,char *base){
 	
@@ -384,7 +373,7 @@ int isBaseCorrect(char *word,char *base){
 	return 1;
 
 }
-int extractTheLinks(char *buffer,char *seedUrl,int depth,char *linkArr[],HashTable ht[]){
+int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS_ALLOWED],char *seedUrl,HashTable ht[]){
 
     int i=0;
   
@@ -399,15 +388,12 @@ int extractTheLinks(char *buffer,char *seedUrl,int depth,char *linkArr[],HashTab
 			
 			
             word = getTheLink(buffer,&i);
-            if(isLinkValid(word) && (j=closingAnchorTagPresent(buffer,i))  && isBaseCorrect(word,seedUrl) &&  isUnique(word,ht)){
+            if(isLinkValid(word) && (j=closingAnchorTagPresent(buffer,i))  && isBaseCorrect(word,seedUrl) && isUniqueInList(strlen(word),word,ht)){
 				
                 i=j;
 
                 linkArr[counter] =  word;
-				
-				//insertInList(word,seedUrl,depth,&head,ht);
-				
-				
+				   
                 counter++;
 				if(counter==MAX_LINKS_ALLOWED){
 					
@@ -433,7 +419,7 @@ int extractTheLinks(char *buffer,char *seedUrl,int depth,char *linkArr[],HashTab
 
 
 /*##########################################################################################################################################*/
-char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl,int flag){
+char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl){
 	
 	static int fileCounter=0;
 	printf("############DOWNLOADING FILE####################\n");
@@ -447,10 +433,8 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl
 	fileName = (char *)malloc(sizeof(char)*130);
 	sprintf(fileName,"%s/temp.txt",dir);
 	
-	//if(!flag)
-		sprintf(command,"wget -O ");
-	//else
-		//sprintf(command,"wget -b -O ");
+	
+	sprintf(command,"wget -O ");
 	
 	//strcat(command,dir);
 	
@@ -462,8 +446,11 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl
 	
 	FILE *fp;
 	fp = fopen(fileName,"r");
+	if(isSeed)
+		sprintf(fileName,"%s/index%d-%d.html",dir,(++fileCounter)*100,depth);
 	
-	sprintf(fileName,"%s/index%d_%d.html",dir,(++fileCounter),depth);
+	else
+		sprintf(fileName,"%s/index%d_%d.html",dir,(++fileCounter),depth);
 	
 	
 	char *appendThisString = (char *)malloc(sizeof(char)*300);
@@ -502,9 +489,9 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,int isSeed,char *seedUrl
 
 }
 /*
-void downloadFilesFromList(char *dir,LINKS **head){
+void downloadFilesFromList(char *dir){
 	
-	LINKS *temp = *head;
+	LINKS *temp = head;
 	LINKS *temp2;
 
 	char *fname;
@@ -517,7 +504,7 @@ void downloadFilesFromList(char *dir,LINKS **head){
 		
 		
 	}
-	temp=*head;
+	temp=head;
 	while(temp!=NULL){
 		temp2=temp;
 		free(temp->link);
@@ -542,7 +529,7 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
 	int success=0;
 	
 	// 1 is for seed url and 0 is  a neccessary evil
-	file=downloadTheHtmlFile(url,dir,depth,1,seedUrl,0);
+	file=downloadTheHtmlFile(url,dir,depth,1,seedUrl);
 
 	
 
@@ -552,13 +539,13 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
 
 
 	
-    success = extractTheLinks(html,seedUrl,depth,linksArr,ht);
+    success = extractTheLinks(html,linksArr,seedUrl,ht);
 
-	for(int i=0;i<success;i++)
-		insertInList(linksArr[i],url,depth,&head,ht);	
-	
+	for(int i=0;i<success;i++){
+		//if(isUniqueInList(linksArr[i]))
+			insertInList(linksArr[i],url,depth,&head,ht);
+	}
 
-	
 	
 	free(html);
     printf("\nlinks found++++++ were %d\n\n",success);
@@ -567,27 +554,23 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
         printf("\nno links were found\n");
     }
 
-	
+	/*
 	LINKS *temp;
-	temp = *head;
-	
-	char *name;
-	
-	if(depth==1){
-		
-		for(int i=0;i<success;i++){
-			name = downloadTheHtmlFile(linksArr[i],dir,depth,0,url,1);
-			free(name);
-		}
-		return;
+	temp = head;
+	*/
+	for(int i=0;i<success;i++){
+		//if(isUniqueInList(linksArr[i]))
+			crawlItBaby(url,linksArr[i],dir,depth-1,head,ht);
 	}
 	
+	
+	/*
 	while(temp!=NULL){
 		if(temp->isVisited==0){
 			if((temp->depth)-1>=1 && temp->depth==depth){
 				temp->isVisited=1;
 			
-			crawlItBaby(seedUrl,temp->link,dir,depth-1,head,ht);
+			crawlItBaby(seedUrl,temp->link,dir,depth-1);
 			
 			}
 		}
@@ -595,7 +578,7 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
 	
 	}
 	
-	
+	*/
 
 	
 	
@@ -605,10 +588,10 @@ void main(int argc,char *argv[]){
 	
 	int depth;
 	char linkCounter=0;
-	LINKS *head = NULL;
-	HashTable ht[MAX_SIZE_FOR_HASH];
+	HashTable ht[MAX_HASH_SIZE];
+	LINKS *head=NULL;
 	
-	for(int i=0;i<MAX_SIZE_FOR_HASH;i++)
+	for(int i=0;i<MAX_HASH_SIZE;i++)
 		ht[i].total=0;
 
 	if(isValidUrl(argv[1])){
@@ -619,41 +602,9 @@ void main(int argc,char *argv[]){
 			
 				printf("###################ENGINE STARTING######################################\n\n\n");
 				crawlItBaby(argv[1],argv[1],argv[2],depth,&head,ht);
-				printf("\n\nLINKS FOUND %d\n\n",printAll(&head));
-			//	downloadFilesFromList(argv[2],&head);
-				int counter=0;
-				for(int i=0;i<MAX_SIZE_FOR_HASH;i++)
-					if(ht[i].total>0)
-						counter++;
-				printf("\n\n_______________%d______________\n",counter);
-				FILE *fp;
-				fp = fopen("fileLINKS.txt","w");
-			/*	for(LINKS *temp=head;temp!=NULL;temp=temp->next){
-					
-					char *link = temp->link;
-					char ch;
-					int i=0;
-					while((ch=link[i++])!='\0')
-						fputc(ch,fp);
-					
-					
-					
-					fputc('\n',fp);
-					
+				printf("LINKS FOUND %d\n\n",printAll(&head));
 				
-						  
-						  }
-					
-					*/
-				fclose(fp);
-				LINKS *t = head;
-				for(LINKS *temp=head;temp!=NULL;){
-					t=temp;
-					temp=temp->next;
-					free(t->link);
-					free(t);
-					
-				}
+				exit(1);
 			}
 			else
 				printf("\ninvalid depth --Depth should be greater than 0 and less than %d\n",(MAX_DEPTH-'0') + 1);
