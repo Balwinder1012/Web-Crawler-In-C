@@ -203,6 +203,19 @@ char* readTheFile(char *fileName){
 
 }
 
+
+int isFile(char *ch,int i){
+
+	if(  (ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n")) || (ch[i]=='p' && ch[i+1]=='n' && ch[i+2]=='g' && ch[i+3]==null && printf("\n####PNG FOUND#####\n")) ||
+	     
+	   		(ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='g' && ch[i+3]==null && printf("\n####JPG FOUND#####\n")) || (ch[i]=='g' && ch[i+1]=='i' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####GIF FOUND#####\n")) ||
+     	    (ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='e' && ch[i+3]=='g' && ch[i+4]==null && printf("\n####PDF FOUND#####\n")) || 
+	  		(ch[i]=='z' && ch[i+1]=='i' && ch[i+2]=='p' && ch[i+3]==null && printf("\n####ZIP FOUND#####\n"))	||
+	  		(ch[i]=='r' && ch[i+1]=='a' && ch[i+2]=='r' && ch[i+3]==null && printf("\n####RAR FOUND#####\n")) )
+		return 1;
+	return 0;
+
+}
 int findOpenAnchorTag(char *ch,int *i){
 
     int j=*i;
@@ -296,8 +309,7 @@ int isLinkValid(char *ch){
     int i=0;
     while(ch[i]!=null){
 
-         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || (
-				ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n"))){
+         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || isFile(ch,i)){
 
             return 0;
          }
@@ -556,14 +568,14 @@ void main(int argc,char *argv[]){
 				printf("###################ENGINE STARTING######################################\n\n\n");
 				crawlItBaby(argv[1],argv[1],argv[2],depth,&head,ht,argv[1]);
 				printf("LINKS FOUND %d\n\n",printAll(&head));
-				
+				/*
 				for(LINKS *ptr=head;ptr!=NULL;){
 					LINKS *temp = ptr;
 					free(temp->link);
 					ptr = ptr->next;
 					free(temp);
 				}
-				
+				*/
 				exit(1);
 			}
 			else
