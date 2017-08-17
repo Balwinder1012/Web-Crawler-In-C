@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <time.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -235,6 +236,7 @@ int findOpenAnchorTag(char *ch,int *i){
 
 
 }
+
 void traverseSpaces(char ch[],int *j){
     while(ch[*j]==' ')
         *j = *j + 1;
@@ -488,6 +490,72 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,char *seedUrl){
 	return fileName;
 
 }
+char *downloadTheHtmlFile1(char *url,char *dir,int depth,char *seedUrl){
+	
+	static int fileCounter=0;
+	printf("############DOWNLOADING FILE####################\n");
+	char *command = malloc(sizeof(char)*200);
+	
+	char *fileName;
+	
+	char *space = " ";
+	
+	
+	fileName = (char *)malloc(sizeof(char)*130);
+	sprintf(fileName,"%s/temp.txt",dir);
+	
+	
+	sprintf(command,"wget -b -O ");
+
+	strcat(command,fileName);
+	strcat(command,space);
+	//strcat(command,);
+	strcat(command,url);
+	system(command);
+	
+	
+	FILE *fp;
+	fp = fopen(fileName,"r");
+	
+		sprintf(fileName,"%s/index%d_%d.html",dir,(++fileCounter),depth);
+	
+	
+	char *appendThisString = (char *)malloc(sizeof(char)*300);
+	sprintf(appendThisString,"<!--URL - %s ## Depth - %d ## SeedUrl - %s-->\n\n",url,depth,seedUrl);
+	if(fp){
+		
+		FILE *newFile;
+
+		newFile = fopen(fileName,"w");
+		
+		char ch;
+		int i=0;
+		while(appendThisString[i]!=null)
+			fputc(appendThisString[i++],newFile);
+		
+		while((ch=fgetc(fp))!=EOF)
+			fputc(ch,newFile);
+		
+		free(appendThisString);
+		fclose(newFile);
+		fclose(fp);
+	
+	}
+	else{
+		printf("\nerror in opening file\n");
+		
+	}
+	
+	
+	free(command);
+
+	
+	printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
+	
+	return fileName;
+
+}
+
 
 void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTable ht[],char *baseUrl){
 
@@ -551,6 +619,9 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
 }
 void main(int argc,char *argv[]){
 	
+	//clock_t t;
+    //t = clock();
+	
 	int depth;
 	char linkCounter=0;
 	HashTable ht[MAX_HASH_SIZE];
@@ -576,6 +647,10 @@ void main(int argc,char *argv[]){
 					free(temp);
 				}
 				*/
+				/* t = clock() - t;
+   				 double time_taken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+ 
+   				 printf("\n\nCrawler took %f seconds to execute \n", time_taken);*/
 				exit(1);
 			}
 			else
