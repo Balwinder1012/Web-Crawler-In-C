@@ -11,7 +11,7 @@
 #define MAX_LINK_SIZE 100
 #define MAX_LINKS_ALLOWED 20
 #define MAX_HASH_SIZE 100
-#define MAX_WORD 50
+#define MAX_WORD 200
 
 
 typedef struct lists{
@@ -160,7 +160,7 @@ char *getTheWord(char *ch,int *i){
 	
 	char *word = (char *)malloc(sizeof(char)*MAX_WORD);
 	int counter=0;
-	while(ch[j]!='<' && ch[j]!=null && ch[j]!=' ' && ch[j]!='-' && ch[j]!='_' && ch[j]!='/'){
+	while(ch[j]!='<' && ch[j]!=null && ch[j]!=' ' && ch[j]!='-' && ch[j]!='_' && ch[j]!='/' && ch[j]!=',' && ch[j]!='.' && ch[j]!='|'){
 		word[counter++]=ch[j++];
 		if(counter==MAX_WORD)
 			break;
@@ -169,7 +169,6 @@ char *getTheWord(char *ch,int *i){
 	word[counter]=null;
 	*i=j+1;
 	
-	//printf("the word is %ld\n\n",strlen(word));
 	return word;
 	
 
@@ -178,7 +177,8 @@ int isThereWord(char *buffer,int *i){
 	
 	int j=*i;
 	traverseSpaces(buffer,&j);
-//	printf("\nchecking for %c\n\n",buffer[j]);
+
+	
 	if(buffer[j]==null || buffer[j]=='<' || buffer[j]=='/'){
 		*i=j;
 		return 0;
@@ -210,7 +210,7 @@ int getHashValue(char *word){
 		ascii += word[i++];
 	}
 	
-	//printf("ascii %d",ascii);
+	
 	return ascii%100;
 
 }
@@ -226,60 +226,88 @@ theWords *getNewNode(char *word,char *url){
 
 }
 theWords *isSameWordOnUrl(char *word,char *url,hashTable ht[]){
-	//printf("url = %s word = %s",url,word);
+	
 	int index = getHashValue(word);
-//	printf("%d",index);
+
 	theWords *ptr;
 	if((ptr=ht[index].head)==NULL)
 		return ptr;
+
 	
 	theWords *last = ht[index].last;
 	
+	
 	do{
-		if(strcmp(ptr->keyword,word) && strcmp(ptr->url,url)){
 		
+		if(!strcmp(ptr->keyword,word) && !strcmp(ptr->url,url))
 			return ptr;
-		}
+		
 			
+		if(ptr==last)
+			break;
 		ptr = ptr->next;
-	}while(ptr!=last);
+	}while(1);
 	
 	return ptr=NULL;
 
 }
 void insertIntoList(char *word,char *url,theWords ***head,hashTable ht[]){
 	
-	//theWords *ptr = **head;
+
 	theWords *ptr;
-//	printf("checking");
+
 	
 	if(ptr = isSameWordOnUrl(word,url,ht)){
+
 		ptr->freq += 1;
+	
+		free(word);
+		
 		return;
 	
 	}
-	//return;
-	else{
-	printf("not same");
-	}
+	
 	theWords *node = getNewNode(word,url);
 	int index =  getHashValue(word);
 	if(ht[index].head==NULL){
 		ht[index].head = node;
+		ht[index].last=node;
+		
+		theWords *temp = **head;
+		
+		if(temp==NULL){
+			**head = node;
+			node->next=NULL;
+		}
+		else{
+			node->next = **head;
+			**head = node;
+			ht[index].last=node;
+		
+		}
+		
+		if(0)
+		while(temp!=NULL){
+			printf("list is %s\n",temp->keyword);
+			temp=temp->next;
+		}
 	}
 	else{
 		
-		ptr = **head;
+		
+		ptr = ht[index].head;
 		theWords *last;
 		last = ht[index].last;
-		do{
+		while(ptr!=last){
 		
 			ptr = ptr->next;
-		}while(ptr!=last);
+		}
 		
-		//theWords *nextNode = ptr->next;
+	
 		node->next = ptr->next;
 		ptr->next = node;
+		ht[index].last = node;
+		
 		
 	
 	}
@@ -296,8 +324,8 @@ char *getTheUrl(char *buffer){
 		i++;
 	}
 	i += 6;
-//	printf("\n##  %c  %c #\n\n",buffer[i],buffer[i+1]);
-	char *url = (char *)malloc(sizeof(char)*100);
+
+	char *url = (char *)malloc(sizeof(char)*200);
 	while(buffer[i]!=' ')
 		url[counter++]=buffer[i++];
 	
@@ -307,17 +335,17 @@ char *getTheUrl(char *buffer){
 	
 
 }
-int extractTheWords(char *buffer,theWords **head,hashTable ht[]){
+int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
 
     int i=0;
   
 	int counter=0;
-	
+	static int urlIndexer=0;
 	char *url;
 	
 	url = getTheUrl(buffer);
-	printf("\n%s\n",url);
-   
+	urls[urlIndexer++]=url;
+
         if(findOpenAnchorTag(buffer,&i) ){
 			
 			while(isThereWord(buffer,&i)){
@@ -331,7 +359,7 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[]){
 				
          	   if(isWordValid(word) ){
 				 
-			printf("%s \n",word);
+				  
 				   insertIntoList(word,url,&head,ht);
 				   
          	       counter++;
@@ -340,28 +368,28 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[]){
 					
 						break;
 					}
-			 	
-				//  free(word);
+				
+			 		
+			
 
           	  }
-              else{//printf("err");
-				 // printf("word invalid");
-                free(word);}
-				
-			//	i += strlen(word)-1;
-				
+              else
+                free(word);
+							
 			
 			}
 			
 
         }
-	else{
-	//printf("err");
-	}
+	
+	//Scanning meta tags now
+	
+	
+	
 		
 
 		
-    return counter;
+    return urlIndexer;
 
 }
 
@@ -369,6 +397,8 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[]){
 void main(int argc,char *argv[]){
 	
 	hashTable ht[100];
+	char *urls[1000];  //this array holds the addresses of the urls so that they could be freed later
+	int urlIndexer;
 	
 	for(int i=0;i<100;i++)
 		ht[i].head=NULL;
@@ -378,6 +408,7 @@ void main(int argc,char *argv[]){
 	char *files[500];
 	
 	int n; //n denotes number of files
+	
 	if(isValidDir(argv[1])){
 		n=getAllTheFiles(argv[1],files);
 		
@@ -391,20 +422,35 @@ void main(int argc,char *argv[]){
 			char *buffer;
 			buffer = readTheFile(fileName);
 			
-			extractTheWords(buffer,&head,ht);
+			urlIndexer = extractTheWords(buffer,&head,ht,urls);
 	
-			printf("\n\n\n\n\n");
+			
 			
 			free(buffer);
-			break;
+	
+			
 		
 		}
 		
 		if(head==NULL)
 			printf("head is null");
 		theWords *ptr = head;
-		for(;ptr!=NULL;ptr=ptr->next)
-			printf("%-70s %s",ptr->url,ptr->keyword);
+		printf("\n");
+		
+	
+		while(ptr!=NULL){
+			
+			printf("%-90s %-40s %d\n",ptr->url,ptr->keyword,ptr->freq);
+			
+			theWords *t = ptr;
+			ptr=ptr->next;
+		
+			free(t->keyword);
+			free(t);
+			
+		}
+		for(int i=0;i<urlIndexer;i++)
+			free(urls[i]);
 			
 		
 		
