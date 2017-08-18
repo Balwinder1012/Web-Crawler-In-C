@@ -8,7 +8,7 @@
 #define null '\0'
 #define MAX_DEPTH '3' 
 #define MAX_LINK_SIZE 100
-#define MAX_LINKS_ALLOWED 5
+#define MAX_LINKS_ALLOWED 20
 #define MAX_HASH_SIZE 100
 
 typedef struct node{
@@ -100,7 +100,7 @@ int printAll(LINKS **head){
 	int noOfLinks=0;
 	ptr = *head;
 	while(ptr!=NULL){
-		printf("link = %-70s  depth = %d  %s\n",ptr->link,ptr->depth,ptr->seedUrl);
+		//printf("link = %-70s  depth = %d  %s\n",ptr->link,ptr->depth,ptr->seedUrl);
 		noOfLinks++;
 		ptr=ptr->next;
 	}
@@ -210,9 +210,10 @@ int isFile(char *ch,int i){
 	if(  (ch[i]=='p' && ch[i+1]=='d' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####PDF FOUND#####\n")) || (ch[i]=='p' && ch[i+1]=='n' && ch[i+2]=='g' && ch[i+3]==null && printf("\n####PNG FOUND#####\n")) ||
 	     
 	   		(ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='g' && ch[i+3]==null && printf("\n####JPG FOUND#####\n")) || (ch[i]=='g' && ch[i+1]=='i' && ch[i+2]=='f' && ch[i+3]==null && printf("\n####GIF FOUND#####\n")) ||
-     	    (ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='e' && ch[i+3]=='g' && ch[i+4]==null && printf("\n####PDF FOUND#####\n")) || 
+     	    (ch[i]=='j' && ch[i+1]=='p' && ch[i+2]=='e' && ch[i+3]=='g' && ch[i+4]==null && printf("\n####JPEG FOUND#####\n")) || 
 	  		(ch[i]=='z' && ch[i+1]=='i' && ch[i+2]=='p' && ch[i+3]==null && printf("\n####ZIP FOUND#####\n"))	||
-	  		(ch[i]=='r' && ch[i+1]=='a' && ch[i+2]=='r' && ch[i+3]==null && printf("\n####RAR FOUND#####\n")) )
+	  		(ch[i]=='r' && ch[i+1]=='a' && ch[i+2]=='r' && ch[i+3]==null && printf("\n####RAR FOUND#####\n")) ||
+	   		(ch[i]=='x' && ch[i+1]=='l' && ch[i+2]=='s' && ch[i+3]==null && printf("\n####XLS FOUND#####\n"))  )
 		return 1;
 	return 0;
 
@@ -429,7 +430,7 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS_ALLOWED],char *seedUrl,
 char *downloadTheHtmlFile(char *url,char *dir,int depth,char *seedUrl){
 	
 	static int fileCounter=0;
-	printf("############DOWNLOADING FILE####################\n");
+	//printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
 	
 	char *fileName;
@@ -485,7 +486,7 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,char *seedUrl){
 	free(command);
 
 	
-	printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
+	//printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
 	
 	return fileName;
 
@@ -493,7 +494,7 @@ char *downloadTheHtmlFile(char *url,char *dir,int depth,char *seedUrl){
 char *downloadTheHtmlFile1(char *url,char *dir,int depth,char *seedUrl){
 	
 	static int fileCounter=0;
-	printf("############DOWNLOADING FILE####################\n");
+//	printf("############DOWNLOADING FILE####################\n");
 	char *command = malloc(sizeof(char)*200);
 	
 	char *fileName;
@@ -550,7 +551,7 @@ char *downloadTheHtmlFile1(char *url,char *dir,int depth,char *seedUrl){
 	free(command);
 
 	
-	printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
+//	printf("############ FILE %-20s DOWNLOADED	####################\n",fileName);
 	
 	return fileName;
 
@@ -564,7 +565,7 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
 		return;
 		
 	}
-	printf("#########################CRAWLING START for %s with depth %d##############################\n",url,depth);
+	//printf("#########################CRAWLING START for %s with depth %d##############################\n",url,depth);
 	char *ch;
 	char *file;
 	char *html;
@@ -584,14 +585,14 @@ void crawlItBaby(char *seedUrl,char *url,char *dir,int depth,LINKS **head,HashTa
     success = extractTheLinks(html,linksArr,baseUrl,ht);
 
 	for(int i=0;i<success;i++){
-			printf("\n\n%-60s %s",linksArr[i],seedUrl);
+			//printf("\n\n%-60s %s",linksArr[i],seedUrl);
 			insertInList(linksArr[i],url,depth,&head,ht);
 	}
 	
 	
 	
 	free(html);
-    printf("\n\n\nlinks found were %d  \n\n",success);
+   // printf("\n\n\nlinks found were %d  \n\n",success);
 
     if(!success){
         printf("\nno links were found\n");

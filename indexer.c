@@ -524,7 +524,20 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
 
 }
 
+void storeTheNodeInFile(theWords *node){
+	
+	static int index=0;
+	FILE *fp = fopen("indexerOutput.txt","a");
+	
+	char string[400];
+	sprintf(string,"%-5d %-20s %-100s  %4d",++index,node->keyword,node->url,node->freq);
+	
+	   
+	fprintf(fp,"%s\n",string);
+	fclose(fp);
+	
 
+}
 void main(int argc,char *argv[]){
 	
 	hashTable ht[300];
@@ -538,6 +551,8 @@ void main(int argc,char *argv[]){
 	theWords *head = NULL;
 	char *files[500];
 	
+	FILE *fp = fopen("indexerOutput.txt","w");
+	fclose(fp);
 	int n; //n denotes number of files
 	
 	if(isValidDir(argv[1])){
@@ -550,7 +565,7 @@ void main(int argc,char *argv[]){
 			char fileName[100];
 			
 			sprintf(fileName,"%s/%s",argv[1],files[i]);
-			printf("Reading File %s\n",fileName);
+		//	printf("Reading File %s\n",fileName);
 			
 			free(files[i]);
 			char *buffer;
@@ -574,9 +589,10 @@ void main(int argc,char *argv[]){
 	
 		while(ptr!=NULL){
 			
-			printf("%-90s %-40s %d\n",ptr->url,ptr->keyword,ptr->freq);
+		//	printf("%-90s %-40s %d\n",ptr->url,ptr->keyword,ptr->freq);
 			
 			theWords *t = ptr;
+			storeTheNodeInFile(t);
 			ptr=ptr->next;
 		
 			free(t->keyword);
