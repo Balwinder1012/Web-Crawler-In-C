@@ -72,7 +72,7 @@ int isValidUrl(char *url){
 	
 	char *command = (char *)malloc(sizeof(char)*1000);
 	char *first;
-	//printf(\n"url in isValidUrl"\n);
+	
 	first = "wget --spider ";
 	strcpy(command,first);
 	strcat(command,url);

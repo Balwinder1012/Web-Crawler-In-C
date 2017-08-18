@@ -5,15 +5,15 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <ctype.h>
 #include <dirent.h>
 #define null '\0'
 #define MAX_DEPTH '3' 
 #define MAX_LINK_SIZE 100
-#define MAX_LINKS_ALLOWED 20
+#define MAX_WORDS_ALLOWED 300
 #define MAX_HASH_SIZE 100
 #define MAX_WORD 200
-
-
+int totalWords=0;
 typedef struct lists{
 	
 	char *keyword;
@@ -128,7 +128,7 @@ int getAllTheFiles(char *dir,char *files[500]){
 	
 
 }
-int findOpenAnchorTag(char *ch,int *i){
+int findOpenTitleTag(char *ch,int *i){
 
     int j=*i;
 
@@ -153,6 +153,12 @@ void traverseSpaces(char ch[],int *j){
     while(ch[*j]==' ')
         *j = *j + 1;
 }
+int isAlphabet(char ch){
+	if((ch>='a' && ch<='z') || (ch>='A' && ch<='Z'))
+		return 1;
+	return 0;
+
+}
 char *getTheWord(char *ch,int *i){
 
 	int j=*i;
@@ -160,8 +166,12 @@ char *getTheWord(char *ch,int *i){
 	
 	char *word = (char *)malloc(sizeof(char)*MAX_WORD);
 	int counter=0;
-	while(ch[j]!='<' && ch[j]!=null && ch[j]!=' ' && ch[j]!='-' && ch[j]!='_' && ch[j]!='/' && ch[j]!=',' && ch[j]!='.' && ch[j]!='|'){
-		word[counter++]=ch[j++];
+	//while(ch[j]!='<' && ch[j]!=null && ch[j]!=' ' && ch[j]!='-' && ch[j]!='_' && ch[j]!='/' && ch[j]!=',' && ch[j]!='.' && ch[j]!='|' && ch[j]!='>'){
+	while(isAlphabet(ch[j])){	
+		
+		word[counter]=ch[j++];
+		word[counter] = tolower(word[counter]);
+		counter++;
 		if(counter==MAX_WORD)
 			break;
 		
@@ -211,7 +221,7 @@ int getHashValue(char *word){
 	}
 	
 	
-	return ascii%100;
+	return ascii%300;
 
 }
 
@@ -288,7 +298,7 @@ void insertIntoList(char *word,char *url,theWords ***head,hashTable ht[]){
 		
 		if(0)
 		while(temp!=NULL){
-			printf("list is %s\n",temp->keyword);
+		//	printf("list is %s\n",temp->keyword);
 			temp=temp->next;
 		}
 	}
@@ -335,6 +345,74 @@ char *getTheUrl(char *buffer){
 	
 
 }
+int findOpenHeadTag(char *ch,int *i){
+	
+	int j=*i;
+
+    while(!(ch[j]=='<' && ch[j+1]=='h' && ch[j+2]=='e' && ch[j+3]=='a' && ch[j+4]=='d')){
+        if(ch[j]==null){
+            *i=j;
+            return 0;
+        }
+
+        j++;
+
+    }
+	j=j+5;
+    *i = j;
+    return 1;
+
+}
+int isthereMeta(char *buffer,int *i){
+	int j=*i;
+	traverseSpaces(buffer,&j);
+
+
+	if(buffer[j]!=null && buffer[j]=='h' && buffer[j+1]!=null && buffer[j+1]=='e' && buffer[j+2]!=null && buffer[j+2]=='a' && buffer[j+3]!=null && 
+	   buffer[j+3]=='d' && buffer[j+4]!=null && buffer[j+4]=='>') 
+		return 0;
+	
+	
+	while( !(buffer[j]=='<' && buffer[j+1]=='m' && buffer[j+2]=='e' && buffer[j+3]=='t' && buffer[j+4]=='a')){
+		j++;
+		if(buffer[j]==null){
+			*i=j;
+			return 0;	
+  }
+		
+	}
+	
+	while(!(buffer[j]=='c' && buffer[j+1]=='o' && buffer[j+2]=='n' && buffer[j+3]=='t' && buffer[j+4]=='e' && buffer[j+5]=='n' && buffer[j+6]=='t')){
+	//	printf("%c ",buffer[j]);
+		j++;
+		
+		if(buffer[j]==null){
+			*i=j;
+			return 0;	
+		}
+		
+	}
+	//printf("\n9%c%c%c#$#\n",buffer[j],buffer[j+1],buffer[j+2]);
+	
+	j = j+6;
+	traverseSpaces(buffer,&j);
+	
+	j++;
+	
+	if(buffer[j]!='=')
+		return 0;
+	
+	j--;
+	//printf("8%c%c%c",buffer[j],buffer[j+1],buffer[j+2]);
+	j = j+2;
+	*i=j;
+	return 1;
+	
+	  
+	
+	
+}
+
 int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
 
     int i=0;
@@ -346,25 +424,27 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
 	url = getTheUrl(buffer);
 	urls[urlIndexer++]=url;
 
-        if(findOpenAnchorTag(buffer,&i) ){
+       if(findOpenTitleTag(buffer,&i) ){
 			
 			while(isThereWord(buffer,&i)){
 				
-               int j=0;
+              
 				
          	   char *word;
-			
-			
+				
+				
+				
          	   word = getTheWord(buffer,&i);
 				
          	   if(isWordValid(word) ){
 				 
-				  
+				
 				   insertIntoList(word,url,&head,ht);
 				   
+				
          	       counter++;
 				   
-					if(counter==MAX_LINKS_ALLOWED){
+					if(counter==MAX_WORDS_ALLOWED){
 					
 						break;
 					}
@@ -383,6 +463,57 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
         }
 	
 	//Scanning meta tags now
+	i=0;
+	
+	if(findOpenHeadTag(buffer,&i)){
+		//printf("\n\n ##%c%c%c##1\n\n",buffer[i-1],buffer[i],buffer[i+1]);
+		while(isthereMeta(buffer,&i)){
+		//	printf("\n\n # %c\n\n",buffer[i]);
+			while(buffer[i]!='"')
+				i++;
+			i++; // for skipping "
+			traverseSpaces(buffer,&i);
+			while(buffer[i]!=null){
+
+				traverseSpaces(buffer,&i);
+			//	printf("##%c##",buffer[i]);
+				
+				
+				if(buffer[i]=='>')
+						break;
+					
+				
+				char *word;
+			
+				word = getTheWord(buffer,&i);
+			/*	int p=strlen(word);
+				word[p]='X';
+				word[p+1]=null;
+			*/
+			   
+			  //printf("\n$%s$\n",word);																																  		
+				if(isWordValid(word)){
+				
+					insertIntoList(word,url,&head,ht);
+					 counter++;
+				  
+					if(counter==MAX_WORDS_ALLOWED){
+					
+						return urlIndexer;
+					}
+				}else
+					free(word);
+				//break;
+			}
+					
+				
+	//	break;
+		
+		}
+	
+	
+	}
+	
 	
 	
 	
@@ -396,7 +527,7 @@ int extractTheWords(char *buffer,theWords **head,hashTable ht[],char *urls[]){
 
 void main(int argc,char *argv[]){
 	
-	hashTable ht[100];
+	hashTable ht[300];
 	char *urls[1000];  //this array holds the addresses of the urls so that they could be freed later
 	int urlIndexer;
 	
@@ -414,7 +545,10 @@ void main(int argc,char *argv[]){
 		
 		for(int i=0;i<n;i++){
 		
+		/*	char *te = "index7_1.html";
+			if(!strcmp(te,files[i])){*/
 			char fileName[100];
+			
 			sprintf(fileName,"%s/%s",argv[1],files[i]);
 			printf("Reading File %s\n",fileName);
 			
@@ -427,10 +561,10 @@ void main(int argc,char *argv[]){
 			
 			
 			free(buffer);
-	
+			}
 			
 		
-		}
+		
 		
 		if(head==NULL)
 			printf("head is null");
@@ -447,13 +581,16 @@ void main(int argc,char *argv[]){
 		
 			free(t->keyword);
 			free(t);
+			totalWords++;
 			
 		}
 		for(int i=0;i<urlIndexer;i++)
 			free(urls[i]);
 			
 		
+	
 		
+		printf("\n\ntotal number of words is %d \n",totalWords);
 	
 	}
 	else{
