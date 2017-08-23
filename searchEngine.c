@@ -20,6 +20,7 @@ typedef struct lists{
 	char *keyword;
 	char *url;
 	int freq;
+	
 	struct lists *next;
 
 }theWords;
@@ -88,8 +89,11 @@ theWords *getNewNode(char *word,char *url,int freq){
 
 	theWords *node = (theWords *)malloc(sizeof(theWords));
 	node->keyword = word;
+	//sprintf(node->keyword,"%s",word);
+//	free(word);
 	node->freq = freq;
 	node->url = url;
+
 	return node;
 	
 
@@ -203,7 +207,7 @@ void makeTheList(char *buffer,theWords **head,hashTable ht[]){
 			
 			freq = sum;
 			insertIntoList(word,url,freq,&head,ht);
-	
+	//		printf("%-20s %-100s\n ",word,url);
 		
 		}
 	
@@ -218,22 +222,258 @@ void makeTheList(char *buffer,theWords **head,hashTable ht[]){
 	
 	}
 
+}/*
+void qsort(theWords *arr,int l,int r){
+
+	if(l<r){
+	
+		int mid = partition(arr,l,r);
+		qsort(arr,l,mid-1);
+		qsort(arr,mid+1,r);
+	
+	
+	}
+
+
 }
-void main(){
+int pa*/
+void bubbleSort(theWords *arr,int n){
+
+	for(int i=0;i<n-1;i++)
+	
+		for(int j=0;j<n-i-1;j++)
+		
+			if(arr[j+1].freq>arr[j].freq){
+				theWords temp;
+				temp.url = arr[j+1].url;
+				temp.freq = arr[j+1].freq;
+				arr[j+1].url = arr[j].url;
+				arr[j+1].freq = arr[j].freq;
+				arr[j].url = temp.url;
+				arr[j].freq = temp.freq;
+			}
+
+
+}
+void printResultFor(char *word,hashTable *ht){
+
+	int index = getHashValue(word);
+	theWords *head = ht[index].head;
+	theWords *tail = ht[index].last;
+	
+	theWords arr[300];
+	int i=0;
+	
+	printf("%s",word);
+	
+	while(head!=tail ){
+		
+		if(!strcmp(head->keyword,word)){
+		//arr[i].keyword = head->keyword;
+		arr[i].url = head->url;
+		arr[i].freq = head->freq;
+		i++;
+		}
+		head=head->next;
+		
+	}
+	
+	
+	bubbleSort(arr,i);
+	if(1){
+	for(int j=0;j<i;j++)
+		printf("%-100s %d\n",arr[j].url,arr[j].freq);
+	
+	}
+
+}
+int isDoneAlready(char *url,theWords *arr,int n){
+	for(int i=0;i<n;i++)
+		if(!strcmp(arr[i].url,url)) 
+			return 1;
+	return 0;
+
+}
+int isPresentInAll(int freq,char *word,theWords *urls[],int n,int k,theWords *finalArr,int finalIndex){
+
+	
+	
+	int f=freq;
+	if(isDoneAlready(word,finalArr,finalIndex))
+		return 0;
+	
+	if(n==k+1) return f;
+	
+
+//	printf("##n= %d k=%d##",n,k);
+	for(int i=k+1;i<n;i++ ){
+	
+			for(int j=0;j<100;j++)
+				
+				if(urls[i][j].url!=NULL && !strcmp(word,urls[i][j].url)){
+					f= f*10 + urls[i][j].freq;
+					
+					break;
+				}
+			
+	
+	
+	
+	}
+	return f;
+	
+
+}
+				   
+void printTheResult(char *query[10],int n,hashTable ht[]){
+	
+	theWords *urls[n];
+	int i=n;
+	
+	
+	
+	for(int j=0;j<i;j++){
+		urls[j] = (theWords*)malloc(sizeof(theWords)*100);
+	}
+	
+	for(int k=0;k<i;k++)
+	
+		for(int j=0;j<100;j++)
+			urls[k][j].url=NULL;
+	
+	
+	int arrySize=0;
+	for(int k=0;k<i;k++){
+	
+	int index = getHashValue(query[k]);
+	theWords *head = ht[index].head;
+	theWords *tail = ht[index].last;
+	
+	int j=0;
+		
+	
+	while(head!=tail){
+		
+		if(!strcmp(head->keyword,query[k])){
+	
+		urls[k][j].url = head->url;
+		urls[k][j].freq = head->freq;
+		urls[k][j].keyword = head->keyword;
+		j++;
+		arrySize++;
+			if(j==100) break;
+		}
+		head=head->next;
+		
+	}
+		
+	}
+	int p=0;
+	theWords finalArr[arrySize];
+	
+	if(0)
+	for(int k=0;k<i;k++)
+	{
+		for(int j=0;j<100;j++)
+			if(urls[k][j].url!=NULL)
+				printf("###%-100s  %-10s %d\n",urls[k][j].url,query[k],urls[k][j].freq);
+			printf("\n");
+		}
+	
+	
+	
+	for(int k=0;k<i;k++){
+		
+		for(int j=0;j<100;j++)
+			if(urls[k][j].url!=NULL){
+				int f=0;
+			
+				if(   f=isPresentInAll(urls[k][j].freq,urls[k][j].url,urls,i,k,finalArr,p)){
+					finalArr[p].url=urls[k][j].url;
+					finalArr[p].freq=f;
+					
+					p++;
+				
+				}
+		
+			
+	
+		}
+		else break;
+	
+	
+	
+	}
+
+	bubbleSort(finalArr,p);
+	if(1){
+	for(int j=0;j<p;j++)
+		printf("%02d %-100s \n",j,finalArr[j].url);
+	
+	}
+	for(int j=0;j<i;j++){
+		free(urls[j]);
+	}
+	
+	
+//	printf("%s %s",urls[0]->url,urls[1]->url);
+	
+	
+	
+
+}
+void main(int argc,char *argv[]){
 	
 	char *buffer;
 	theWords *head=NULL;
 	hashTable ht[300];
 	
+	
+	
 	for(int i=0;i<300;i++)
 		ht[i].head=NULL;
 	
+	
+	
+	
+	printf("\n################################SIMPLE SEARCH ENGINE######################\n");
+	FILE *fp = fopen("indexerOutput1.txt","w");
+	fclose(fp);
+	
 	buffer = readTheFile();
 	makeTheList(buffer,&head,ht);
+
 	free(buffer);
-	/*for(theWords *ptr=head;ptr;ptr=ptr->next)
-		printf("%-90s %-40s %d\n",ptr->url,ptr->keyword,ptr->freq);*/
-	printf("%s\n",ht[getHashValue("hygienists")].head->url);
 	
+	
+	printf("\n\n\n########LOADING RESULT#######\n\n\n");
+	char *query[10];
+	int i=0;
+	int j=1;
+	while(argc-->1)
+		query[i++]=argv[j++];
+
+
+	printTheResult(query,i,ht);
+	
+	
+	if(1)
+	for(theWords * temp=head;;){
+	
+		if(temp==NULL)
+			break;
+		free(temp->url);
+		free(temp->keyword);
+		theWords *p = temp;
+		
+		temp=temp->next;
+		
+		free(p);
+		
+	
+	}
+	
+		
+
 	
 }

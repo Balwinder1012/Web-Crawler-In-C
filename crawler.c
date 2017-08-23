@@ -312,7 +312,7 @@ int isLinkValid(char *ch){
     int i=0;
     while(ch[i]!=null){
 
-         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || isFile(ch,i)){
+         if(!((ch[i]>='a' && ch[i]<='z') || (ch[i]>='A' && ch[i]<='Z') || ch[i]=='.' || ch[i]=='&' || ch[i]=='?' || ch[i]=='=' || ch[i]==':' || ch[i]=='-' || ch[i]=='/' || (ch[i]>='0' && ch[i]<='9')) || isFile(ch,i)){
 
             return 0;
          }
@@ -413,6 +413,7 @@ int extractTheLinks(char *buffer,char *linkArr[MAX_LINKS_ALLOWED],char *seedUrl,
                 free(word);
 
         }
+		
 
 
 		if(buffer[i]==null)
